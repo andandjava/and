@@ -1,0 +1,537 @@
+activity_main.xml
+=================
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#936"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emp No"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salary"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tableLayout1"
+        android:layout_marginTop="30dp"
+        android:text="E M S"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="41dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/button2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/button3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/button4"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/button5"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button6"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="15dp"
+        android:text="E X I T" />
+
+</RelativeLayout>
+
+DBHelper.java
+==============
+package com.example.ems;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBHelper extends SQLiteOpenHelper 
+{
+Context con;
+SQLiteDatabase db;
+public DBHelper(Context context) 
+{
+super(context, "Employee", null, 1);
+this.con=context;
+db=getWritableDatabase();
+
+}
+
+public void onCreate(SQLiteDatabase arg0) 
+{
+ arg0.execSQL("create table emp(empno integer primary key autoincrement,ename text,sal integer);");	
+}
+
+public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) 
+{}
+
+
+public long insertEmp(String s1,String s2)
+{
+	ContentValues cv=new ContentValues();
+	cv.put("ename",s1);
+	cv.put("sal",s2);
+	long l=db.insert("emp", null, cv);
+	return l;
+}
+
+public Cursor getEmp(String s)
+{
+	Cursor c=db.query("emp", new String[]{"ename","sal"}, "empno="+s, null, null, null, null);
+	return c;
+}
+
+public int updateEmp(String s1,String s2,String s3)
+{
+ ContentValues cv=new ContentValues();
+ cv.put("ename", s2);
+ cv.put("sal", s3);
+ int n=db.update("emp",cv,"empno="+s1, null);
+ //db.update(table, values, whereClause, whereArgs);
+ return n;
+}
+
+public int deleteEmp(String s)
+{
+ int n=db.delete("emp","empno="+s,null);
+ return n;
+}
+
+public Cursor getAll()
+{
+ Cursor c=db.query("emp",new String[]{"empno","ename","sal"}, null, null, null, null, null);
+ return c;
+}
+}
+
+MainActivity.java
+=================
+
+package com.example.ems;
+
+
+import android.app.Activity;
+
+import android.database.Cursor;
+
+import android.os.Bundle;
+
+import android.view.View;
+
+import android.view.View.OnClickListener;
+
+import android.widget.Button;
+
+import android.widget.EditText;
+
+import android.widget.TextView;
+
+import android.widget.Toast;
+
+
+
+public class MainActivity extends Activity implements OnClickListener
+ {
+	
+DBHelper h;
+	
+EditText ed1, ed2, ed3;
+
+Button b1, b2, b3, b4, b5, b6;
+	
+TextView tv;
+
+	
+
+protected void onCreate(Bundle savedInstanceState)
+{
+	
+	super.onCreate(savedInstanceState);
+		
+	setContentView(R.layout.activity_main);
+		
+	h = new DBHelper(this);
+
+		
+	ed1 = (EditText) findViewById(R.id.editText1);
+		
+	ed2 = (EditText) findViewById(R.id.editText2);
+		
+	ed3 = (EditText) findViewById(R.id.editText3);
+
+		
+	tv = (TextView) findViewById(R.id.textView4);
+
+		
+	b1 = (Button) findViewById(R.id.button1);
+		
+	b2 = (Button) findViewById(R.id.button2);
+		
+	b3 = (Button) findViewById(R.id.button3);
+		
+	b4 = (Button) findViewById(R.id.button4);
+		
+	b5 = (Button) findViewById(R.id.button5);
+		
+	b6 = (Button) findViewById(R.id.button6);
+
+		
+	b1.setOnClickListener(this);
+		
+	b2.setOnClickListener(this);
+		
+	b3.setOnClickListener(this);
+		
+	b4.setOnClickListener(this);
+		
+	b5.setOnClickListener(this);
+		
+	b6.setOnClickListener(this);
+
+	
+	}
+
+	
+	public void onClick(View v) 
+	{
+		
+		if (v == b1)// Add
+		
+		{
+			
+			clearFields();
+			
+			ed2.requestFocus();
+			
+			tv.setText("Enter Name & Salary");
+		
+		} else if (v == b2)// save
+		
+		{
+			
+			String s1 = ed2.getText().toString().trim();
+			
+			String s2 = ed3.getText().toString().trim();
+
+			
+			if (s1.length() <= 0) 
+			{
+				
+				tv.setText("Enter Name");
+				
+				ed2.requestFocus();
+			
+			} else if (s2.length() <= 0) 
+			{
+				
+				tv.setText("Enter Salary");
+				
+				ed3.requestFocus();
+			
+			} else 
+			{
+				
+				long l = h.insertEmp(s1, s2);
+				
+				if (l > 0) 
+				{
+					
+					tv.setText("Employee Saved");
+					
+					clearFields();
+				
+				} 
+				else 
+				{
+					
+					tv.setText("Employee NOT Saved");
+				
+				}
+			
+			}
+		
+		} else if (v == b3)// search
+		
+		{
+			
+			String s = ed1.getText().toString().trim();
+			
+			ed2.setText("");
+			
+			ed3.setText("");
+			
+			if (s.length() <= 0) 
+			{
+				
+				tv.setText("Enter Emp No");
+				
+				ed1.requestFocus();
+			
+			} 
+			else 
+			{
+				
+				Cursor c = h.getEmp(s);
+				
+				if (c.moveToFirst()) 
+				{
+					
+		
+					String s1 = c.getString(0);
+					
+					String s2 = c.getString(1);
+					
+					ed2.setText(s1);
+					
+					ed3.setText(s2);
+				
+				} 
+				else {
+					
+					tv.setText("Not Found");
+				
+				}
+			
+			}
+		
+		} else if (v == b4)// edit
+		
+		{
+			
+			String s1 = ed1.getText().toString().trim();
+			
+			String s2 = ed2.getText().toString().trim();
+			
+			String s3 = ed3.getText().toString().trim();
+			
+			int n = h.updateEmp(s1, s2, s3);
+			
+			if(n > 0) 
+			{
+				
+				clearFields();
+				
+				tv.setText("Updated..");
+			
+			} else {
+				
+				tv.setText("Updation Failed");
+			
+			}
+		
+		} 
+		else if (v == b5)// delete
+		
+		{
+			
+			String s = ed1.getText().toString().trim();
+			
+			int n = h.deleteEmp(s);
+			
+			if (n > 0) {
+				
+				clearFields();
+				
+				tv.setText("Deleted");
+			
+			} 
+			else 
+			{
+				
+				tv.setText("Deletion Failed");
+			
+			}
+		
+		}
+		 else {
+			
+		// finish();
+			
+			Cursor c = h.getAll();
+			
+		while (c.moveToNext()) 
+		{
+				
+			Toast.makeText(
+	this,
+c.getString(0) + "\n" + c.getString(1) + "\n"
++ c.getString(2), 1).show();
+			
+		}
+		
+	}
+	
+}
+
+	
+public void clearFields()
+ {
+		
+	ed1.setText("");
+		
+	ed2.setText("");
+		
+	ed3.setText("");
+	
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

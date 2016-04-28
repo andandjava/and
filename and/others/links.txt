@@ -1,0 +1,47 @@
+enadu bank what not to do
+--------------------------
+http://eenadu.net/Specialpages/chaduvu/chaduvuinner.aspx?qry=topstory2
+
+eatz
+=====
+http://etisbew.us/demo/eatz/mobile-app/dish-level-rating.html
+
+banks
+=======
+http://blog.oureducation.in/top-coaching-centers-for-bank-po-in-hyderabad/
+
+
+
+
+
+navigable drawer links
+========================
+
+http://www.recursiverobot.com/post/59404388046/implementing-the-new-navigation-drawer-in-android
+
+http://android-er.blogspot.in/2014/01/android-drawerlayout-and-drawerlistener.html
+
+Fragment
+=========
+https://thenewcircle.com/s/post/1250/android_fragments_tutorial
+
+Animations
+===========
+http://www.androidhive.info/2013/06/android-working-with-xml-animations/
+
+ActionBar
+=========
+http://www.androidhive.info/2013/11/android-working-with-action-bar/
+
+TabLayout
+=========
+http://www.mkyong.com/android/android-tablayout-example/
+
+Swipetabs
+==========
+http://examples.javacodegeeks.com/android/core/app/fragment/android-fragment-tabs-example/
+
+Fragment Tabs
+==============
+http://www.androidbegin.com/tutorial/implementing-fragment-tabs-in-android/
+

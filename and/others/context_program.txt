@@ -1,0 +1,63 @@
+http://android-er.blogspot.in/2014/04/mainactivitythis-vs-getapplicationconte.html
+
+activity_main.xml
+==================
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:autoLink="web"
+        android:text="http://android-er.blogspot.com/"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/info1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic" />
+
+</LinearLayout>
+
+MainActivity.java
+=================
+package com.example.androidtestcontext;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+ @Override
+ protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+  
+  TextView info1 = (TextView)findViewById(R.id.info1);
+  TextView info2 = (TextView)findViewById(R.id.info2);
+
+  String s1 = "MainActivity.this:\n" 
+   + "getClass() = " + MainActivity.this.getClass() + "\n"
+   + MainActivity.this;
+  info1.setText(s1);
+  
+  String s2 = "getApplicationContext():\n" 
+    + "getClass() = " + getApplicationContext().getClass() + "\n"
+    + getApplicationContext();
+  
+  info2.setText(s2);
+ }
+
+}

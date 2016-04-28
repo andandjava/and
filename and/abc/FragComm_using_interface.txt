@@ -1,0 +1,238 @@
+Fragment Communication:
+=======================
+data send from fragment1 to fragment2 using 
+
+interface inorder to reduce the tight coupling between the two fragments.
+
+1.Communicator 
+2.MainActivity.java
+3.activity_main.xml
+4.FragmentOne.java
+5.fragment_one.xml
+6.FragmentTwo.java
+7.fragment_two.xml
+
+
+Communicator.java
+=================
+package com.example.myfragmentcomm;
+
+public interface Communicator {
+
+	public void respond(String data);
+}
+
+MainACtivity.java
+=================
+
+package com.example.myfragmentcomm;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements Communicator{
+
+	FragmentManager manager;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+	}
+	
+	@Override
+	public void respond(String data)
+	{
+		FragmentManager manager=getFragmentManager();
+		FragmentTwo f2=(FragmentTwo) manager.findFragmentById(R.id.fragment2);
+		
+		//FragmentTwo f2=(FragmentTwo) manager.findFragmentById(R.id.fragment2);
+		f2.changeText(data);
+		
+	}
+}
+
+activity_main.xml
+=================
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.myfragmentcomm.FragmentOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.myfragmentcomm.FragmentTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>	
+FragmentOne.java
+================
+	package com.example.myfragmentcomm;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class FragmentOne extends Fragment implements View.OnClickListener{
+
+	Button button;
+	int counter = 0;
+	Communicator comm;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		if(savedInstanceState==null)
+		{
+			counter=0;
+		}
+		else
+		{
+			counter=savedInstanceState.getInt("counter",0);
+		}
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		return inflater.inflate(R.layout.fragment_one, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+
+		
+		super.onActivityCreated(savedInstanceState);
+		comm = (Communicator) getActivity();
+		button = (Button) getActivity().findViewById(R.id.button1);
+		button.setOnClickListener(this);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		
+		super.onSaveInstanceState(outState);
+		outState.putInt("counter", counter);
+	}
+
+	@Override
+	public void onClick(View v) {
+
+		counter++;
+		comm.respond("the button was clicked "+counter+" times");
+//		comm.respond("data sent from fragment1");
+
+	}
+
+}
+
+fragment_one.xml
+================
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00ff00"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+</LinearLayout>
+FragmentTwo.java
+================
+package com.example.myfragmentcomm;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class FragmentTwo extends Fragment{
+	
+	TextView text;
+	String data;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+	
+		View view= inflater.inflate(R.layout.fragment_two, container, false);
+		if(savedInstanceState==null)
+		{
+			
+		}
+		else
+		{
+			data=savedInstanceState.getString("text");
+			TextView myText=(TextView)view.findViewById(R.id.textView1);
+			myText.setText(data);
+		}
+		return view;
+	}
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+	
+		super.onActivityCreated(savedInstanceState);
+		text=(TextView)getActivity().findViewById(R.id.textView1);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		
+	outState.putString("text", data);
+	
+	}
+	public void changeText(String data)
+	{
+		this.data=data;
+		text.setText(data);
+	}
+
+}
+
+fragment_two.xml
+================
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment2" />
+
+</LinearLayout>

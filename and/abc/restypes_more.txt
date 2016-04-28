@@ -1,0 +1,157 @@
+More Resource Type
+===================
+bool
+color
+dimension
+id
+integer
+integer array
+typed array
+bool.xml
+========
+bools.xml( res/values-small/bools.xml)
+----
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="screen_small">true</bool>
+    <bool name="adjust_view_bounds">true</bool>
+</resources>
+java
+----
+Resources res = getResources();
+boolean screenIsSmall = res.getBoolean(R.bool.screen_small);
+Example
+-------
+<ImageView
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:src="@drawable/logo"
+    android:adjustViewBounds="@bool/adjust_view_bounds" />
+
+
+color.xml
+=========
+res/values/colors.xml:
+---------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="opaque_red">#f00</color>
+   <color name="translucent_red">#80ff0000</color>
+
+in java code
+------------
+Resources res = getResources();
+int color = res.getColor(R.color.opaque_red);
+
+Example
+-------
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/translucent_red"
+    android:text="Hello"/>
+
+
+Dimension
+=========
+res/values/dimens.xml:
+---------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textview_height">25dp</dimen>
+    <dimen name="textview_width">150dp</dimen>
+    <dimen name="ball_radius">30dp</dimen>
+    <dimen name="font_size">16sp</dimen>
+</resources>
+
+in javacode
+------------
+Resources res = getResources();
+float fontSize = res.getDimension(R.dimen.font_size);
+
+Example
+-------
+<TextView
+    android:layout_height="@dimen/textview_height"
+    android:layout_width="@dimen/textview_width"
+    android:textSize="@dimen/font_size"/>
+
+
+ID
+===
+res/values/filename.xml
+res/values/ids.xml:
+-------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="button_ok" />
+    <item type="id" name="dialog_exit" />
+</resources>
+
+in java code
+-------------
+Example
+--------
+
+Integer
+========
+res/values/integers.xml:
+---------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_speed">75</integer>
+    <integer name="min_speed">5</integer>
+</resources>
+
+
+in java code
+-------------
+Resources res = getResources();
+int maxSpeed = res.getInteger(R.integer.max_speed);
+
+Integer Array
+=============
+res/values/integers.xml:
+------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="bits">
+        <item>4</item>
+        <item>8</item>
+        <item>16</item>
+        <item>32</item>
+    </integer-array>
+</resources>
+
+in java code
+-------------
+Resources res = getResources();
+int[] bits = res.getIntArray(R.array.bits);
+
+Typed Array
+===========
+res/values/arrays.xml:
+----------------------
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@drawable/home</item>
+        <item>@drawable/settings</item>
+        <item>@drawable/logout</item>
+    </array>
+    <array name="colors">
+        <item>#FFFF0000</item>
+        <item>#FF00FF00</item>
+        <item>#FF0000FF</item>
+    </array>
+</resources>
+
+
+in java code
+-------------
+Resources res = getResources();
+TypedArray icons = res.obtainTypedArray(R.array.icons);
+Drawable drawable = icons.getDrawable(0);
+
+TypedArray colors = res.obtainTypedArray(R.array.colors);
+int color = colors.getColor(0,0);

@@ -1,0 +1,26 @@
+moving project to GitHub
+========================
+go to location(.git location) in git bash
+
+git init
+
+git status
+
+(add req folder to the destination location i.e. git location)
+
+git add [Name of the file]
+git add TestingApp
+
+git commit -m "TestingApp is added
+
+
+git remote add origin https://github.com/ajay66/TestingApp.git"
+
+git push origin master
+
+if it rejected
+git pull origin master
+
+git push origin master
+
+git status

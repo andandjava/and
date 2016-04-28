@@ -1,0 +1,8 @@
+textDiscounts1.setTextSize(18);
+textDiscounts1.setTextColor(Color.parseColor("#cd3838"));
+
+
+public void changecolor(View v)
+{
+	tv.setTextColor(getResources().getColorStateList(R.color.mycolorstyle));
+}

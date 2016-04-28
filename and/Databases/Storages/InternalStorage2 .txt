@@ -1,0 +1,133 @@
+Internal Storage
+===============
+converting image to bytearray and again bytearray to image
+activity_main.xml
+=================
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout
+    
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+    <ImageView 
+        android:id="@+id/img_convert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    
+     <Button 
+        android:id="@+id/img_byte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="img_byte"/>
+
+    <Button
+        android:id="@+id/byte_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="byte_img" />
+
+   
+
+     <TextView
+        android:id="@+id/convert_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+     
+</LinearLayout>
+
+</ScrollView>
+
+MainActivity.java
+=================
+package com.example.bitmap;
+
+import java.io.ByteArrayOutputStream;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class MainActivity extends Activity implements OnClickListener {
+
+	/** Called when the activity is first created. */
+	Button img_byte, byte_img;
+	ImageView image;
+	TextView value,tv;
+	public ByteArrayOutputStream bos;
+	public Bitmap bm,bmp;
+	public byte[] bitmapdata;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		image = (ImageView) findViewById(R.id.img_convert);
+		value = (TextView) findViewById(R.id.convert_txt);
+		img_byte = (Button) findViewById(R.id.img_byte);
+		byte_img = (Button) findViewById(R.id.byte_img);
+		tv=(TextView)findViewById(R.id.textView1);
+		
+	
+		
+		//converting image(jpeg) into bitmap
+		bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		bos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.JPEG, 40, bos);
+		//Specifies the known formats a bitmap can be compressed into specified outputstream.
+		
+		img_byte.setOnClickListener(this);
+		byte_img.setOnClickListener(this);
+	}
+
+	public void onClick(View v) {
+		if (v == img_byte) {
+			bitmapdata = bos.toByteArray();
+			
+			String converted_txt = "";
+			tv.setText("");
+			tv.append("\n converting image into bytearray");
+			tv.append("\n size of betmapdata.lenghtis :"+bitmapdata.length);
+			for (int i = 0; i < bitmapdata.length; i++) {
+				Log.w("Image Conversion", String.valueOf(bitmapdata[i]));
+				converted_txt = converted_txt + bitmapdata[i];
+			}
+			tv.append("size is"+bitmapdata.length);
+			value.setText(converted_txt);
+			value.setVisibility(View.VISIBLE);
+			image.setVisibility(View.INVISIBLE);
+		} 
+		else if (v == byte_img) {
+			tv.append("\n  Converting byte array into image");
+			tv.append("\n length of byte array:"+bitmapdata.length);
+			bmp = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
+			image.setImageBitmap(bmp);
+			image.setVisibility(View.VISIBLE);
+			value.setText("");
+			tv.append("\n after");
+			tv.append("\n size id:"+bitmapdata.length);
+			value.setVisibility(View.INVISIBLE);
+			Log.w("Image Conversion", "converted");
+		}
+	}
+}

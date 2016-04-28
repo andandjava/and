@@ -1,0 +1,88 @@
+TimePicker
+=========
+activity_main.xml
+=================
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timePicker1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="17dp"
+        android:text="Current Time:" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timePicker1"
+        android:layout_below="@id/timePicker1"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="55dp"
+        android:text="Change Time" />
+
+</RelativeLayout>
+
+MainActivity.java
+=================
+package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+	TextView textview1;
+	TimePicker timepicker1;
+	Button changetime;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		textview1 = (TextView) findViewById(R.id.textView1);
+		timepicker1 = (TimePicker) findViewById(R.id.timePicker1);
+
+		// Uncomment the below line of code for 24 hour view
+		timepicker1.setIs24HourView(true);
+		changetime = (Button) findViewById(R.id.button1);
+
+		textview1.setText(getCurrentTime());
+
+		changetime.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				textview1.setText(getCurrentTime());
+			}
+		});
+
+	}
+
+	public String getCurrentTime() {
+		String currentTime = "Current Time: " + timepicker1.getCurrentHour()
+				+ ":" + timepicker1.getCurrentMinute();
+		return currentTime;
+	}
+
+}

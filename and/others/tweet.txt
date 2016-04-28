@@ -1,0 +1,11 @@
+android xml file
+
+File:animation.xml
+Resource Type:tweet animation
+Folder: res/anim
+Root Element:set
+Finish
+
+animation.xml
+
+<?xmlversion="1.0" encoding="utf-8"?>

@@ -1,0 +1,11 @@
+http://www.javatpoint.com/android-spinner-example
+
+http://sampleprogramz.com/android/spinner.php
+
+http://www.learn-android-easily.com/2013/07/android-development-tutorials.html
+
+http://examples.javacodegeeks.com/android/core/ui/events/android-event-handling-example/
+
+http://startandroid.ru/en/lessons/complete-list/232-lesson-24-activity-lifecycle-example-about-changing-states-with-two-activities.html
+
+http://kirandeveloper.blogspot.in/2011/11/android-listview-and-listactivity.html

@@ -1,0 +1,57 @@
+app permission: give the necessary permission when required
+can add/remove the permission dynamically
+reduce memory consumption of giving all permissions initially.
+
+web experience: chrome customm tab
+on every tab a draggable icon(google) will be present on the top.
+If you received/send msg or while making phone conservations(call) which containing restaurant name--it shows the address,directions etc
+
+fingerpring support
+It supports for the phone lock.not for individual apps.
+
+mobille payments: checkout process easier & faster.
+by copying personal data like name,card number etc in a secure way.
+
+app links:
+if there is any links it directly opens in its own.
+ex:link in twitter--wont shows open in twitter or google.. directly it opens in twitter.
+
+power and charging--Doze motion detectors
+Doze is very important.it consumes less power.Standby time will by nearly 2times.
+if there is no motion in device then the phone goes to deep sleep.
+in android M, new functionality Doze to improve device standard time by 2times longer compared android through usb type-c which provides faster charging.
+
+improved cut,copy and past
+
+Improved features in M
+----------------------
+App backup & restore for apps:if we put auto back up in manifest file then the whole app data will be stored in google drive automatically.
+It has backup of 25MB or less automatically to the google drive.
+
+new app drawer:apps scrolls vertically.(older scrolls horizontally)
+recent apps rested at top.
+
+ram manager: MIN & MAX usage of RAM shows on the home page only like seek bar(not to go to settings)
+
+Adaptable Storage devices: making micro SD card as internal memory
+in old if we install apk it will save in internal memory.if we move from internal to sdcard some data will be there in internal memory also.in advance device it  wont be like that it will be completely in on memory location i.e. internal memory or sd card because sd card is taking as internal memory card only.
+
+Android Marshmallo dark theme:removed
+
+Google Now:showing restaurant details
+
+virtual voice mail:
+
+Rotating home screen:to landscape mode.
+
+delete screenshots:option to save/delete immediately when we take a screen shot of the screen.
+
+add/remove statusbar icons:
+
+ram manager
+
+network settings reset option
+It wipes all network settings like wifi,cellular data,bluetooth devices etc
+
+storage get make over.sd card as internal memory
+

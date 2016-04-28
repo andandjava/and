@@ -1,0 +1,215 @@
+WebXmlPullParser
+================
+is the most famous xml parser.
+it is better than dom and sax parsers.
+Example
+--------
+activity_main.xml
+-----------------
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textPull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+    
+    <ListView 
+        android:id="@+id/listPull"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPull"
+        />
+
+</RelativeLayout>
+
+MainActivity.java
+-----------------
+package com.example.webxmlpullparser;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+	
+	TextView textPull;
+	ListView listPull;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		textPull=(TextView)findViewById(R.id.textPull);
+		listPull=(ListView)findViewById(R.id.listPull);
+		
+		try {
+			XmlPullParserHandler parser=new XmlPullParserHandler();
+			InputStream is=getAssets().open("employees.xml");
+			List emp=parser.parse(is);
+			
+//			textPull.setText((CharSequence) parser.getEmployees());
+			ArrayAdapter<Employee> adapter=new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1,emp);
+			listPull.setAdapter(adapter);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}
+XmlPullParserHandler.java
+-------------------------
+package com.example.webxmlpullparser;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+public class XmlPullParserHandler {
+
+	private List<Employee> employees = new ArrayList<Employee>();
+	private Employee employee;
+	private String text;
+
+//	public List<Employee> getEmployees() {
+//		
+//		return employees;
+//	}
+    public List<Employee> parse(InputStream is) {
+    	
+    	try {
+    		
+			XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+//			factory.setNamespaceAware(true);
+			XmlPullParser parser=factory.newPullParser();
+			//START_DOCUMENT
+			parser.setInput(is, null);
+			//EventType may be START_TAG,END_TAG.TEXT
+			int eventType=parser.getEventType();
+			while(eventType!=XmlPullParser.END_DOCUMENT)
+			{
+				String tagName=parser.getName();
+				switch(eventType)
+				{
+				case XmlPullParser.START_TAG:
+					if(tagName.equalsIgnoreCase("employee"))
+					{
+						employee=new Employee();
+					}
+					break;
+					
+				case XmlPullParser.TEXT:
+					 text=parser.getText();
+					break;
+					
+				case XmlPullParser.END_TAG:
+					if(tagName.equalsIgnoreCase("employee"))
+					{
+						employees.add(employee);
+					}
+					else if(tagName.equalsIgnoreCase("id"))
+					{
+						employee.setId(Integer.parseInt(text));				
+					}
+					else if(tagName.equalsIgnoreCase("name"))
+					{
+						employee.setName(text);
+					}
+					else if(tagName.equalsIgnoreCase("salary"))
+					{
+						employee.setSalary(Float.parseFloat(text));
+					}
+					break;
+				}
+				eventType=parser.next();
+			}
+			
+			
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return employees;  
+    }
+
+}
+Employee.java
+-------------
+package com.example.webxmlpullparser;
+
+public class Employee {
+
+	private int id;
+	private String name;
+	private float salary;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public float getSalary() {
+		return salary;
+	}
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+	
+	@Override
+	public String toString()
+	{
+		
+		return "Id="+id +"\n Name="+name +"\n Salary="+salary;
+	}
+	
+}
+assets/employees.xml
+--------------------
+<?xml version="1.0"?>
+<employees>
+	<employee>
+	    <id>1</id>
+		<name>Sachin Kumar</name>
+		<salary>50000</salary>
+	</employee>
+	<employee>
+	    <id>2</id>
+		<name>Rahul Kumar</name>
+		<salary>60000</salary>
+	</employee>
+	<employee>
+	    <id>3</id>
+		<name>John Mike</name>
+		<salary>70000</salary>
+	</employee>
+</employees>

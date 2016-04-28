@@ -1,0 +1,190 @@
+activity_main.xml
+=================
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hello_world"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Custom List View Example"
+        android:textColor="#ff0000"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+    </ListView>
+
+</LinearLayout>
+
+row_layout.xml
+==============
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="22px"
+        android:layout_height="22px"
+        android:layout_marginLeft="4px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="4px"
+        android:src="@drawable/ic_launcher" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/label"
+        android:textSize="20px" >
+    </TextView>
+
+</LinearLayout>
+
+MainActivity.xml
+================
+package com.example.sampleactivity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	MySimpleArrayAdapter adapter;
+	// Create String array.
+	String[] values = { "Android", "iPhone", "WindowsMobile", "Blackberry",
+			"WebOS", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2" };
+
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
+		setContentView(R.layout.activity_main);
+
+		ListView listView = (ListView) findViewById(android.R.id.list);
+
+		// Set our custom array adapter as the ListView's adapter.
+		adapter = new MySimpleArrayAdapter(this, values);
+		
+		listView.setAdapter(adapter);
+
+		// When list item is clicked calls this listener
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				// TODO Auto-generated method stub
+
+				//Shows clicked item value with position
+				Toast.makeText(getApplicationContext(), position+1+" Position "+values[position] ,Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	public class MySimpleArrayAdapter extends BaseAdapter {
+
+		private final Context context;
+		private final String[] values;
+		LayoutInflater inflater;
+
+		public MySimpleArrayAdapter(Context context, String[] values) {
+			this.context = context;
+			this.values = values;
+			// Cache the LayoutInflate to avoid asking for a new one each time.
+			inflater = LayoutInflater.from(this.context);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return values.length;
+		}
+
+		@Override
+		public String getItem(int position) {
+			// TODO Auto-generated method stub
+			return values[position];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			MyViewHolder mViewHolder;
+
+			// Create a new row view
+			if (convertView == null) {
+
+				// inflating row layout
+				convertView = inflater.inflate(R.layout.row_layout, null);
+				
+				// Find the child views.
+				mViewHolder = new MyViewHolder();
+				
+				mViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.label);
+				mViewHolder.ivIcon = (ImageView) convertView.findViewById(R.id.icon);
+				
+				// Optimization: Tag the row with it's child views, so we don't
+				// have to
+				// call findViewById() later when we reuse the row.
+				convertView.setTag(mViewHolder);
+
+			} // Reuse existing row view
+			else {
+				// Because we use a ViewHolder, we avoid having to call
+				// findViewById().
+				mViewHolder = (MyViewHolder) convertView.getTag();
+			}
+			// Find the child views.
+			mViewHolder.tvTitle.setText(values[position]);
+			if (position % 2 == 0) {
+				mViewHolder.ivIcon.setImageResource(android.R.drawable.btn_star_big_off);
+			} else {
+				mViewHolder.ivIcon.setImageResource(android.R.drawable.btn_star_big_on);
+			}
+
+			return convertView;
+		}
+
+		private class MyViewHolder {
+			// The child views in each row.
+			TextView tvTitle;
+			ImageView ivIcon;
+		}
+	}
+}

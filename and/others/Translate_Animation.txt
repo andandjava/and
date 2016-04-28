@@ -1,0 +1,143 @@
+Translate Animation
+===================
+
+code
+----
+TranslateAnimation moveLefttoRight;
+TranslateAnimation moveRighttoLeft;
+
+moveLefttoRight = new TranslateAnimation(-200, 0, 0, 0);
+moveLefttoRight.setDuration(1000);
+moveLefttoRight.setFillAfter(true);
+
+moveRighttoLeft = new TranslateAnimation(0,-350, 0, 0);
+moveRighttoLeft.setDuration(1000);
+moveRighttoLeft.setFillAfter(true);
+
+
+MainActivity.java
+-----------------
+package com.example.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	TranslateAnimation moveLefttoRight;
+	TranslateAnimation moveRighttoLeft;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		// moveLefttoRight = new TranslateAnimation(0, 200, 0, 0);
+		moveLefttoRight = new TranslateAnimation(-200, 0, 0, 0);
+		moveLefttoRight.setDuration(1000);
+		moveLefttoRight.setFillAfter(true);
+
+		moveRighttoLeft = new TranslateAnimation(0,-350, 0, 0);
+		moveRighttoLeft.setDuration(1000);
+		moveRighttoLeft.setFillAfter(true);
+
+		ImageView img = (ImageView) findViewById(R.id.img);
+		ImageView imgend = (ImageView) findViewById(R.id.imgend);
+		final FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
+		final TextView txt = (TextView) findViewById(R.id.text2);
+
+		img.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				frame.setVisibility(v.VISIBLE);
+
+				frame.startAnimation(moveLefttoRight);
+
+			}
+		});
+
+		imgend.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				frame.setVisibility(v.INVISIBLE);
+				frame.startAnimation(moveRighttoLeft);
+
+			}
+		});
+		txt.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Toast.makeText(getApplicationContext(), "sent msg", 0).show();
+
+			}
+		});
+
+	}
+
+}
+
+activity_main.xml
+-----------------
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f5f5f5"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="#f5f5f5"
+                android:clickable="true"
+                android:drawablePadding="20dp"
+                android:gravity="center"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Send SOS Msg" />
+
+            <ImageView
+                android:id="@+id/imgend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selVersion"
+                android:clickable="true"
+                android:src="@drawable/left1" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selVersion"
+        android:clickable="true"
+        android:src="@drawable/right" />
+
+</RelativeLayout>

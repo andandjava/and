@@ -1,0 +1,238 @@
+Gridview with checkboxes
+=========================
+
+activity_main.xml
+------------------
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/btn_selectall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Select All" />
+    
+    <Button
+        android:id="@+id/btn_clearall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="clear All" />
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btn_selectall"
+        android:numColumns="3"
+        android:verticalSpacing="18dp"
+        
+        android:visibility="visible" >
+    </GridView>
+
+</RelativeLayout>
+
+MainActivity.java
+------------------
+package com.example.taicotask;
+
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.GridView;
+import android.widget.Toast;
+
+@SuppressLint("NewApi")
+public class MainActivity extends Activity implements OnItemClickListener {
+
+	String[] names = { "all","cricket", "hockey", "volleyball", "football",
+			"baseball", "kho kho", "kabaddi", "shuttle", "badminton" };
+	CheckBox ch1, ch2, ch3;
+	Button b1;
+	GridView grid;
+	Button btn_selectall,btn_clearall;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		grid = (GridView) findViewById(R.id.grid);
+		btn_selectall = (Button) findViewById(R.id.btn_selectall);
+		btn_clearall = (Button) findViewById(R.id.btn_clearall);
+		
+
+		final ArrayAdapter adapter = new CustomList(MainActivity.this, names);
+		
+		
+		grid.setAdapter(adapter);
+
+		grid.setSelected(false);
+		grid.setOnItemClickListener(this);
+		
+//		grid.reclaimViews(views)
+		btn_selectall.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				int acount=adapter.getCount();
+				Toast.makeText(MainActivity.this, "adapter size"+acount, 1).show();
+			
+				for(int i=0;i<acount;i++)
+				{
+				Long id=adapter.getItemId(i);
+				System.out.println("id"+i+"--"+id);
+				
+				String st=adapter.getItem(i).toString();
+				System.out.println("name--"+st);
+				
+				Boolean b=adapter.areAllItemsEnabled();
+				System.out.println("areallitems enable"+b);
+				
+				int n=adapter.getItemViewType(i);
+				System.out.println("item view type"+n);
+
+			CheckBox bc=(CheckBox) grid.getChildAt(i).findViewById(R.id.cb);
+			bc.setChecked(true);
+				}
+			}
+		});
+		btn_clearall.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				int acount=adapter.getCount();
+//				Toast.makeText(MainActivity.this, "adapter size"+acount, 1).show();
+			
+				for(int i=0;i<acount;i++)
+				{
+				CheckBox cbc=(CheckBox) grid.getChildAt(i).findViewById(R.id.cb);
+				cbc.setChecked(false);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+//		Toast.makeText(this, "position is " + position, 1).show();
+	}
+	public class CustomList extends ArrayAdapter<String> {
+
+		private final Activity context;
+		private final String[] names;
+		ArrayList<Long> chidlist=new ArrayList<Long>();
+		ArrayList<String> chnamelist=new ArrayList<String>();
+		
+		public CustomList(Activity context, String[] names) {
+			super(context, R.layout.custom_row, names);
+
+			this.context = context;
+			this.names = names;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+
+			LayoutInflater inflater = context.getLayoutInflater();
+			View rowView = inflater.inflate(R.layout.custom_row, null, true);
+
+			final CheckBox cb = (CheckBox) rowView.findViewById(R.id.cb);
+			cb.setText(names[position]);
+			if(cb.getText().equals("all"))
+			{
+				cb.setTypeface(null,Typeface.BOLD);
+				cb.setTextSize(20);
+			}
+			
+			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+					if(isChecked)
+					{
+//						Toast.makeText(context, "checkbox Id-- "+cb.getId()+"Name is"+cb.getText(), 1).show();
+						chidlist.add((long) cb.getId());
+						chnamelist.add( cb.getText().toString());
+						
+//						Toast.makeText(context, "idlist size"+chidlist.size()+"namelist size"+chnamelist.size(), 1).show();
+						for(int i=0;i<chidlist.size();i++)
+						{
+//							Toast.makeText(context, "id--"+chidlist.get(i)+"name--"+chnamelist.get(i), 1).show();
+						}
+						
+//						if(cb.equals("all"))
+//						{
+//							Toast.makeText(context, "checked all", 1).show();
+//						}
+					}
+					else
+					{
+						chidlist.remove((long)cb.getId());
+						chnamelist.remove(cb.getText());
+//						Toast.makeText(context, "idlist size"+chidlist.size()+"namelist size"+chnamelist.size(), 1).show();
+					}
+					if(cb.getText().equals("all"))
+					{
+						if(isChecked)
+						{
+							Toast.makeText(context, "checked all", 1).show();
+							int acount=grid.getCount();
+//							Toast.makeText(MainActivity.this, "adapter size"+acount, 1).show();
+						
+							for(int i=0;i<acount;i++)
+							{
+							CheckBox cbc=(CheckBox) grid.getChildAt(i).findViewById(R.id.cb);
+							cbc.setChecked(true);
+							}
+						}
+						else
+						{
+							Toast.makeText(context, "unchecked all", 1).show();
+							
+							int acount=grid.getCount();
+//							Toast.makeText(MainActivity.this, "adapter size"+acount, 1).show();
+						
+							for(int i=0;i<acount;i++)
+							{
+							CheckBox cbc=(CheckBox) grid.getChildAt(i).findViewById(R.id.cb);
+							cbc.setChecked(false);
+							}
+						}
+					}
+					
+					
+				}
+			});
+
+			return rowView;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+sequence
+
+what is fragment
+why fragment
+advantages of fragment
+
+list of programs
+creating fragment statically
+creating fragment dynamically
+lifecycle of fragment
+life cycle of activity
+life cycle of activity and fragment
+comm between fragments using intents
+comm between fragments using interface
+comm between activity and fragments using intents
+dialog fragment
+list fragment
+preference fragment
+
+map Fragment

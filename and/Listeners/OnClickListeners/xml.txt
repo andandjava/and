@@ -1,0 +1,8 @@
+ android:onClick="doLarge"
+
+   <Button 
+    android:id="@+id/button_l"
+    android:layout_height="wrap_content" 
+    android:layout_width="match_parent" 
+    android:text="@string/button_large"
+    android:onClick="doLarge"/>

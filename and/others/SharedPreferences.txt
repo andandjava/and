@@ -1,0 +1,122 @@
+sharedPreferences
+=================
+
+activity_main.xml
+-----------------
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/hello_world" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:background="#ffffff"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <Button
+                android:id="@+id/button1"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="STORE" />
+
+            <Button
+                android:id="@+id/button2"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="GET" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
+
+MainActivity.java
+-----------------
+package com.app.test;
+
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnClickListener {
+	
+	SharedPreferences sp;
+	Button b1,b2;
+	EditText name;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		sp=getSharedPreferences("mypref", MODE_PRIVATE);
+		
+		name=(EditText)findViewById(R.id.editText1);
+		
+		
+		b1=(Button)findViewById(R.id.button1);
+		b2=(Button)findViewById(R.id.button2);
+		b1.setOnClickListener(MainActivity.this);
+		b2.setOnClickListener(MainActivity.this);
+		
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+		if(v==b1)
+		{
+		
+		SharedPreferences.Editor edit = sp.edit();
+		String m=name.getText().toString();
+		edit.putString("name", ""+m);
+		edit.commit();
+		Toast.makeText(getApplicationContext(),"stored data in shared preference",0).show();
+		}
+		else
+		{
+			String s=sp.getString("name", "not existed in shared preferences");
+			Toast.makeText(getApplicationContext(),"get data from shared preference"+s,0).show();
+		}
+			
+	}
+}

@@ -1,0 +1,32 @@
+customised checkbox
+====================
+ref:http://stackoverflow.com/questions/4037795/android-spacing-between-checkbox-and-text
+
+taking check1 and uncheck_1 as customised images
+
+drawable/custom_checkbox.xml
+----------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_checked="true" android:drawable="@drawable/un_check1"></item>
+    <item android:state_checked="false" android:drawable="@drawable/check1"></item>
+</selector>
+
+activity_main.xml
+----------------
+In checkbox
+
+android:button="@drawable/custom_checkbox"
+
+MainActivity.java
+------------------
+//space between checkbox and text
+
+CheckBox check_remember=(CheckBox)findViewById(R.id.check_remember);
+
+final float scale = this.getResources().getDisplayMetrics().density;
+		check_remember.setPadding(check_remember.getPaddingLeft() + (int)(10.0f * scale + 0.5f),
+				check_remember.getPaddingTop(),
+				check_remember.getPaddingRight(),
+				check_remember.getPaddingBottom());
+

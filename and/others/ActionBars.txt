@@ -1,0 +1,30 @@
+ActionBar
+==========
+
+Overview of Action Bar
+Action bar mainly contains four functional areas. They are app icon, view control, action buttons and action overflow.
+App Icon – App branding logo or icon will be displayed here.
+View Control – A dedicated space to display app title. Also provides option to switch between views by adding spinner or tabbed navigation.
+Action Buttons – Some important actions of the app can be added here.
+Action Overflow – All unimportant action will be shown as a menu.
+
+Check out the following diagram for complete overview about action bar.
+
+ifRoom	Displays the icon if there is space available on the screen
+never	Never places this icon on the action bar
+always	Forces to display the icon always irrespective of space available. This way is not suggested.
+withText	Displays a text along with the icon. Normally the text value defined by android:title will be displayed
+collapseActionView	Defines the action layout associated with it. This action view defined using android:actionLayout or android:actionViewClass
+
+setDisplayHomeAsUpEnabled(true)--navigation(back arrow)
+
+android.parentActivityName--write the complete name of the class(com.example.app.MainActivity)(in manifest file)
+it will goes to the parent class when we clicked the back navigation.	
+
+bar.show()
+bar.hide()
+bar.setIcon(R.drawable.icon);
+
+Enabling Split ActionBars
+---------------------------
+ bar at bottom of the screen

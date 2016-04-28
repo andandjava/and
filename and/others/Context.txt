@@ -1,0 +1,177 @@
+Context is used for many operations but mostly to load and access resources.
+(Inner Classes?)
+context def:
+
+Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.
+or
+Context  is context of current state of the application/object
+It allows access to application-specific resources and classes
+
+context
+=======
+is abstract class
+
+1. can access your application resources.
+2. interact with other applications components by sending messages.
+3. access your environmental information(like assets).
+
+context extends object
+Activity is indirec subclass of context(concrete class)
+
+Activity activity = (Activity)context;
+
+	
+or
+
+ It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.
+--
+
+or
+
+Context  is context of current state of the application/object.It??s an entity that represents various environment data . Context helps the current activity to interact with out side android environment like  local files, databases, class loaders associated to the environment, services including system-level services, and more.
+--
+
+I am sure you already have the context but you don't know that it is the context:
+
+Context is an abstract base class a lot of classes are inherited from.
+
+Therefore when ever the class you are writing code for is one of the following you have you context by using the this reference:
+
+ContextWrapper
+MockContext
+AbstractInputMethodService
+AccessibilityService
+AccountAuthenticatorActivity
+Activity
+ActivityGroup
+AliasActivity
+Application
+BackupAgent
+BackupAgentHelper
+ContextThemeWrapper
+ExpandableListActivity
+InputMethodService
+IntentService
+IsolatedContext
+LauncherActivity
+ListActivity
+MockApplication
+MutableContextWrapper
+NativeActivity
+PreferenceActivity
+RecognitionService
+RemoteViewsService
+RenamingDelegatingContext
+Service
+SpellCheckerService
+TabActivity
+TextToSpeechService
+VpnService
+WallpaperService
+Hence you can write:
+
+Context context = this;
+or
+
+Context context = (Context) this;
+
+Getting context from a view
+============================
+
+You can get the context from a view, for example on your onClickListener
+
+@Override
+public void onClick(View v) {
+ 
+ Context mContext = v.getContext();
+ 
+}
+possibilities
+=============
+Context myContext_1 = ThisClassName.this; // to open a Dialog
+Context myContext_2 = getContext();
+Context myContext_3 = this.getContext();
+Context myContext_4 = this;
+Context myContext_5 = this.getApplicationContext ();
+
+Differences between getContext(),getApplicationContext(),getBaseContext()
+=========================================================================
+getContext() - Returns the context view only current running activity.
+
+getApplicationContext() - Returns the context for all activities running in application.
+
+getBaseContext() - If you want to access Context from another context within application you can access.
+
+Example:
+--------
+Spinner spinner = (Spinner) findViewById(R.id.spinner);
+spinner.setAdapter(adapter);
+            
+spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?>arg0, View arg1, int arg2, long arg3){
+       Toast.makeText(getBaseContext(),"SELECTED", Toast.LENGTH_SHORT).show(); //this line
+    }
+}
+
+sol1:
+
+this ----> getBaseContext() or MyActivity.this
+
+this refers to current object i.e.refers to the OnItemSelectedListener instance, not to the Activity. getBaseContext() refers to the Activity context.or MyActivity.this also refers to the activity context.
+
+differences:
+View.getContext(): Returns the context the view is currently running in. Usually the currently active Activity.
+
+Activity.getApplicationContext(): Returns the context for the entire application (the process all the Activities are running inside of). Use this instead of the current Activity context if you need a context tied to the lifecycle of the entire application, not just the current Activity.
+
+ContextWrapper.getBaseContext(): If you need access to a Context from within another context, you use a ContextWrapper. The Context referred to from inside that ContextWrapper is accessed via getBaseContext().
+
+getApplication vs getApplictionContext
+getApplication present in Activity and service class.
+getApplictionContext present in context class.
+both returns the same object(application object)
+
+getApplicationContext() returns a context of whole application - it should be the same through lifecycle.(for long run)
+
+getApplication() returns application that owns this activity:
+Application app = this.getApplication();
+
+
+getParent() simply returns a parent of view.
+E.g. if you have Linear Layout and you have a button in this layout. When you call button.getParent() then this will return linear layout. So you could done:
+LinearLayout layout = (LinearLayout) button1.getParent();
+
+---
+LoginActivity.this though its referring to your own class which extends Activity class but the base class (Activity) also extends Context class, so it can be used to offer activity context.
+
+getApplication() though its referring to Application object but the Application class extends Context class, so it can be used to offer application context.
+
+getApplicationContext() offers application context.
+
+getBaseContext() offers activity context.
+
+
+this 
+=====
+public class Table
+{
+	int age;              ||  int a  || int age
+	public Table(int age) ||         || int a
+	{                     ||         ||
+		this.age=age; ||  a=age  ||  age=a
+	}
+}
+public class Table
+{
+	int age;
+	public Table(int age)
+	{
+		this(age,"ajay");
+	}
+	public Table(int age,String name)
+	{
+	}	
+}
+
+ref:http://www.simplecodestuffs.com/what-is-context-in-android/

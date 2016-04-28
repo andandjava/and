@@ -1,0 +1,43 @@
+GPS
+====
+LocationManager
+===============
+periodic updates of the device geographical loctions.
+
+getSystemService(LOCATION_SERVICE) returns locationmanager.
+LocationManager manager=getSystemService(LOCATION_SERVICE) 
+
+methods in LocationManager
+--------------------------
+isProviderEnabled(LocationManager.GPS_PROVIDER);--used to check gps provider is enabled or not
+
+isProviderEnabled(LocationManager.NETWORK_PROVIDER);--used to check network provider is enabled or not
+
+requestLocationUpdates(LocationManager.NETWORK_PROVIDER,min_time,min_distance, locationlistener);--registers the updated location details and can get those values using locaiton listener.
+
+getLastKnownLocation(LocationManager.NETWORK_PROVIDER);--get the location details and stores in location.From location we can get latitude and longitude.returns null if device is disabled.
+
+requestLocationUpdates(LocationManager.GPS_PROVIDER,min_time,min_distance, locationlistener);--registers the updated location details and can get those values using locaiton listener.
+
+getLastKnownLocation(LocationManager.GPS_PROVIDER);--get the updated location details and stores in location.From location we can get latitude and longitude.returns null if device is disabled.
+
+
+LocationListener
+================
+receiving notifications from LocationManager when the location has changed.
+
+methods:
+-------
+onLocationChanged(Location location)--called when the location has changed and get the updated values from location.
+Latitude lat=location.getLatitude()
+Longitude long=location.getLongitude()
+
+onProviderDisabled(String provider)--called when  the provider is disabled by the user.
+
+onProviderEnabled(String provider)--called when the provider is enabled by the user.
+
+onStatusChanged(String provider,int status,Bundle extras)--called when a provider status changed.
+status--OUT_SERVICE,TEMPARARLY_UNAVAILABLE,AVAILABLE
+bundle is optional
+
+

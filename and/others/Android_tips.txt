@@ -1,0 +1,20 @@
+Emulator is out of control
+--------------------------
+alt+space, move, up/down arrows to move
+
+C:\Users\<your user>/.android/avd/<image name>/emulator-user.ini
+open the file emulator-user.ini and set window.x and window.y to 0.
+(if files hidden--->View>Options>View (Tab) and select "Show hidden files")
+emulator-user.ini is generated after the first run of the emulator.
+
+
+Hiding action bar in manifest file
+----------------------------------
+this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+ <style name="NOtitleTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+ </style>
+
+and apply this style(theme) to the application in android.

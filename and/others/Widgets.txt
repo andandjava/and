@@ -1,0 +1,119 @@
+Form Widgets
+-----------
+TextView
+TextView Large
+TextView small
+Button
+small button
+toggle button
+checkbox
+radio button
+checked textview
+spinner
+progressbar large
+progressbar normal
+progressbar small
+progressbar Horizontal
+seek bar
+Quick contact badge
+Radio group
+Rating bar
+
+TextFields
+----------
+Plain text
+person name
+password
+password numeric
+email
+phone
+postal address
+multiline text
+time 
+date 
+number
+number signed
+number decimal
+Autocomplete textview
+multi Autocomplete textview
+
+Layouts
+-------
+Gridlayout
+linearlayout vertical
+linearlayout horizontal
+relativelayout
+framelayout 
+include other layout
+table layout
+table row
+space
+fragment
+
+Composite
+---------
+listview
+expandabel listview
+gridview
+scrollview
+horizontal scrollview
+search view
+sliding drawer
+tab host
+tab widget
+webview
+
+Images & media
+--------------
+imageview
+imagebutton
+gallery
+mediacontroller
+videoview
+
+Time & Date
+-----------
+Time Picker
+Date Picker
+Calendarview
+chronometer
+analog clock
+digital clock
+
+Transitions
+-----------
+imageSwitcher
+AdapterViewFlipper
+StackView
+TextSwitcher
+ViewAnimator
+ViewFlipper
+ViewSwitcher
+
+Advanced
+--------
+requestfocus
+View
+view
+ViewStub
+GestureOverlayView
+TextureView
+SurfaceView
+NumberPicker
+zoom button
+zoom controls
+DialogFilter
+TwoLineListItem
+AbsoluteLayout(Depricated)
+
+Other
+-----
+ActionMenuView
+TextClock
+Toolbar
+
+custom & Library Views
+----------------------
+
+
+

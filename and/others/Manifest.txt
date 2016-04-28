@@ -1,0 +1,30 @@
+Activity Manager
+Package Manager
+Backup Manager
+
+intent-filter
+
+action
+data
+category
+
+<manifest>
+----------
+<compatible-screens> 
+<instrumentation> 
+<permission> 
+<permission-group> 
+<permission-tree> 
+<supports-gl-texture> 
+<supports-screens> 
+<uses-configuration> 
+<uses-feature> 
+
+
+06-23 05:30:14.297: I/ActivityManager(376): START u0 {
+act=android.intent.action.UNINSTALL_PACKAGE 
+dat=package:com.example.stringtest 
+cmp=com.android.packageinstaller/.UninstallerActivity (has extras)} from pid 1356
+
+<uses-permission> 
+<uses-sdk>

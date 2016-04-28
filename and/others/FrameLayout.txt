@@ -1,0 +1,13 @@
+FrameLayout
+============
+you can add many views or viewgroups to the framelayout
+
+views are stacked on top of each other.
+
+You can make 1 of the visible at a given instant.
+
+control which view or viewGroup to show programmatically
+
+The view is drawn by default to the top left corner
+
+use android:layout_gravity to arrane views inside framelayout.

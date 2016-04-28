@@ -1,0 +1,91 @@
+Fragments
+==========
+1.create a class that extends fragment.
+2.create a separate layout file or java objects that contain the appearance
+3.use the onCreateView method to link its appearance
+4.attach the fragment inside the Activity through XML(using <fragment>) or java
+5.any no of fragments can be attached to an activity.
+
+Example
+==========
+Fragment which is accessing from the xml(activity_main.xml) file.
+Like this we can access any number of fragments through this xml file.
+this is called static method of accessing fragments.
+
+activity_main.xml
+==================
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.myfragment2.MyFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp" />
+
+</RelativeLayout>
+
+MainActivity.java
+=================
+(default--nochange)
+package com.example.myfragment2;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+}
+
+my_fragment.xml
+=================
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffbb00">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyFragment" />
+
+</LinearLayout>
+MyFragment.java
+===============
+package com.example.myfragment2;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class MyFragment extends Fragment{
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+	
+		return inflater.inflate(R.layout.my_fragment, container, false);
+	}
+
+
+}
+

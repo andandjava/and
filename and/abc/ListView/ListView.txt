@@ -1,0 +1,49 @@
+a)create a Android Project
+b)in xml place a listview from composite
+c>create a values resources file(Android xml file)
+
+Resource type:values
+FileName: list
+Root Element:resources
+>Next 
+
+d)list.xml
+  =========
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="list">
+	<item>India</item>
+	<item>Pakistan</item>
+	<item>SriLanka</item>
+  </string-array>
+</resources>
+
+e)activity_main.xml
+  =================
+place a ListView
+<ListView
+	android:entries="@array/list">
+</ListView>
+
+f)MainActivity.java
+  ==================
+(default)
+package com.example.listviewapp;
+
+import android.app.Activity;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);	
+	}	
+}
+

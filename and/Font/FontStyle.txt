@@ -1,0 +1,39 @@
+Fonts
+=====
+keep the fonts jar files in assets folder.
+
+ChangeFontStyle.java
+--------------------
+package com.example.eatzappp;
+
+import android.content.Context;
+import android.graphics.Typeface;
+
+public class ChangeFontStyle {
+	
+	
+	public static Typeface Lato_Bold;
+	public static Typeface Lato_Regular;
+	
+	public void setTf_lato_bold(Typeface tf_lato_bold) {
+		this.Lato_Bold = tf_lato_bold;
+	}
+
+	public static Typeface getTf_lato_bold(Context context) {
+		return Typeface.createFromAsset(context.getAssets(),
+				"LATO-BOLD.TTF");
+	}
+	
+	public void setTf_lato_regular(Typeface tf_lato_regular) {
+		this.Lato_Regular = tf_lato_regular;
+	}
+
+	public static Typeface getTf_lato_regular(Context context) {
+		return Typeface.createFromAsset(context.getAssets(),
+				"LATO-REGULAR_0.TTF");
+	}
+}
+MainActivity.java
+------------------
+textCheckout=(TextView)findViewById(R.id.textCheckout);
+textCheckout.setTypeface(ChangeFontStyle.getTf_lato_regular(getApplicationContext()));

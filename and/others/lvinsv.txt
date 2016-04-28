@@ -1,0 +1,33 @@
+for (int i = 0; i < hotel.size(); i++) {
+
+			LayoutInflater inflater = null;
+			inflater = (LayoutInflater) getApplicationContext()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View mLinearView = inflater.inflate(R.layout.list_grid, null);
+
+			TextView txtTitle = (TextView) mLinearView
+					.findViewById(R.id.textView1);
+			ImageView imageView = (ImageView) mLinearView
+					.findViewById(R.id.imageView1);
+
+			txtTitle.setText(hotel.get(i));
+			txtTitle.setTypeface(vtb.getTextBold());
+			txtTitle.setTextColor(Color.BLACK);
+			androidAQuery.id(imageView).image(hotel_image.get(i), true, true);
+
+			mLinearListView2.addView(mLinearView);
+			final int j = i;
+			mLinearView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+					Intent in = new Intent(getBaseContext(),
+							WhereToStayInner.class);
+					System.out.println("id is" + hotel_id.get(j));
+					in.putExtra("id", hotel_id.get(j));
+					startActivity(in);
+									}
+			});
+		}

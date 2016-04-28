@@ -1,0 +1,27 @@
+1. Abstraction solves the problem in the design level.
+
+1. Encapsulation solves the problem in the implementation level.
+
+2. Abstraction is used for hiding the unwanted data and giving relevant data.
+
+2. Encapsulation means hiding the code and data into a single unit to protect the data from outside world.
+
+
+3. Abstraction lets you focus on what the object does instead of how it does it
+
+3. Encapsulation means hiding the internal details or mechanics of how an object does something.
+
+4. Abstraction- Outer layout, used in terms of design.
+For Example:-
+ Outer Look of a Mobile Phone, like it has a display screen and keypad buttons to dial a number.
+
+4. Encapsulation- Inner layout, used in terms of implementation.
+For Example:- Inner Implementation detail of a Mobile Phone, how keypad button and Display Screen are connect with each other using circuits.
+=====================
+Abstraction and Encapsulation in Java are two important Object oriented programming concept and they are completely different to each other.
+
+Encapsulation is a process of binding or wrapping the data and the codes that operates on the data into a single entity. This keeps the data safe from outside interface and misuse.
+
+Abstraction is the concept of hiding irrelevant details.In other words make complex system simple by hiding the unnecessary detail from the user.
+
+Abstraction is implemented in Java using interface and abstract class while Encapsulation is implemented using private, package-private and protected access modifier.

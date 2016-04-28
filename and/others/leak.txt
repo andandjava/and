@@ -1,0 +1,15 @@
+"leak" meaning you keep a reference to it thus preventing the GC from collecting it
+
+ two easy ways to avoid context-related memory leaks
+----------------------------------------------------
+1. The most obvious one is to avoid escaping the context outside of its own scope.
+2. The second solution is to use the Application context. This context will live as long as your application is alive and does not depend on the activities life cycle. If you plan on keeping long-lived objects that need a context, remember the application object. You can obtain it easily by calling Context.getApplicationContext() or Activity.getApplication().
+
+In summary, to avoid context-related memory leaks, remember the following:
+
+Do not keep long-lived references to a context-activity (a reference to an activity should have the same life cycle as the activity itself)
+Try using the context-application instead of a context-activity
+Avoid non-static inner classes in an activity if you don't control their life cycle, use a static inner class and make a weak reference to the activity inside. The solution to this issue is to use a static inner class with a WeakReference to the outer class, as done in ViewRoot and its W inner class for instance
+A garbage collector is not an insurance against memory leaks
+
+ref;http://android-developers.blogspot.in/2009/01/avoiding-memory-leaks.html

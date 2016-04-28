@@ -1,0 +1,167 @@
+XML (EXtensible Markup Language):
+=================================
+XML was designed to describe data.
+
+XML stands for EXtensible Markup Language
+XML is a markup language much like HTML
+XML was designed to describe data, not to display data
+XML tags are not predefined. You must define your own tags
+XML is designed to be self-descriptive
+XML is a W3C Recommendation
+
+XML was designed to describe data, with focus on what data is
+HTML was designed to display data, with focus on how data looks
+
+XML Tree
+-------
+XML documents form a tree structure that starts at "the root" and branches to "the leaves".
+
+XML documents must contain a root element. This element is "the parent" of all other elements.
+
+The elements in an XML document form a document tree. The tree starts at the root and branches to the lowest level of the tree.
+
+All elements can have sub elements (child elements)
+<root>
+  <child>
+    <subchild>.....</subchild>
+  </child>
+</root>
+
+All XML Elements Must Have a Closing Tag
+XML Tags are Case Sensitive
+XML Elements Must be Properly Nested
+XML Documents Must Have a Root Element
+XML Attribute Values Must be Quoted
+
+Xml Elements
+
+An XML document contains XML Elements.
+
+
+An XML element is everything from (including) the element's start tag to (including) the element's end tag.
+
+An element can contain:
+
+other elements
+text
+attributes
+or a mix of all of the above...
+
+XML Naming Rules
+XML elements must follow these naming rules:
+
+Element names are case-sensitive
+Element names must start with a letter or underscore
+Element names cannot start with the letters xml (or XML, or Xml, etc)
+Element names can contain letters, digits, hyphens, underscores, and periods
+Element names cannot contain spaces
+Any name can be used, no words are reserved (except xml).
+
+Attributes provide additional information about an element.
+XML Attributes Must be Quoted
+XML Elements vs. Attributes
+<person gender="female">
+  <firstname>Anna</firstname>
+  <lastname>Smith</lastname>
+</person>
+<person>
+  <gender>female</gender>
+  <firstname>Anna</firstname>
+  <lastname>Smith</lastname>
+</person>
+
+XML Namespaces provide a method to avoid element name conflicts.
+
+When using prefixes in XML, a so-called namespace for the prefix must be defined.
+
+The namespace is defined by the xmlns attribute in the start tag of an element.
+
+The namespace declaration has the following syntax. xmlns:prefix="URI".
+
+UTF-8 is the standard character encoding on the web.
+
+UTF-8 is the default character encoding for HTML5, CSS, JavaScript, PHP, SQL, and XML.
+
+DOM (Document Object Model):
+==========================
+The XML DOM defines a standard for accessing and manipulating XML documents.
+
+The DOM presents an XML document as a tree-structure.
+
+Knowing the XML DOM is a must for anyone working with XML.
+
+The XML DOM is a standard for how to get, change, add, or delete XML elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Differences
+===========
+
+SAX:
+
+1. Parses the document on node by node basis.
+2. Does not store the XML in memory.
+3. We can not insert or delete a node.
+4. This model uses top to bottom traversing.
+5. This model does not preserve comments.
+6. It runs little faster than DOM
+
+DOM
+
+1. Stores the entire XML document into memory before processing
+2. Occupies more memory
+3. We can insert or delete nodes
+4. This model can traverse in any direction.
+5. This model preserves comments.
+6. It runs slower than SAX model	

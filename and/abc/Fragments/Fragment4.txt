@@ -1,0 +1,27 @@
+Sending data from Fragment to Fragment
+======================================
+dont maintain direct references of fragments within each other
+create an interface that contains the method which will act as an event carrier
+Let the Activity implement the interface
+Let the Fragment1 use the interface to send the messages
+use the callback method in Activity to trigger changes in Fragment2.
+
+
+interface Communicator
+{
+	public void respond(String data)
+	{
+	}
+}
+class FragmentA extends Fragment
+{
+	Communicator comm;
+	public void onAttach(Activity a)
+	{
+		comm=(Communicator)a;
+	}
+	public void onClick(View v)
+	{
+		comm.respond("bu
+
+}

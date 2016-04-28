@@ -1,0 +1,123 @@
+Notifications and Toast
+=======================
+
+Status Bar Notifications
+-----------------------------------
+A status bar notification adds an icon to the system's status bar with an optional ticker-text message and a notification message in the notifications window. When the user selects the notification, Android fires an Intent that is defined by the Notification (usually to launch an Activity). You can also configure the notification to alert the user with a sound, a vibration, and flashing lights on the device.
+
+A status bar notification should be used for any case in which a background service needs to alert the user about an event that requires a response. A background service should never launch an activity on its own in order to receive user interaction. The service should instead create a status bar notification that will launch the activity when selected by the user.
+
+Pending Intent
+---------------------
+A PendingIntent is a token that you give to a foreign application (e.g. NotificationManager, AlarmManager, Home Screen AppWidgetManager, or other 3rd party applications), which allows the foreign application to use your application's permissions to execute a predefined piece of code.
+
+If you give the foreign application an Intent, and that application sends/broadcasts the Intent you gave, they will execute the Intent with their own permissions. But if you instead give the foreign application a PendingIntent you created using your own permission, that application will execute the contained Intent using your application's permission
+
+
+a) Create a New Android Project:  and place a Button
+
+b) Create a new folder called "raw" in "/res" folder
+  Right Click on "res" in Package Explorer > New > Folder > Folder Name : raw
+
+d) Place a sound file "beep.mp3" in "/res/raw" folder
+
+e) 
+
+public class MainActivity extends Activity implements OnClickListener 
+{
+Button b;
+NotificationManager nm;
+Notification notify;
+
+public void onCreate(Bundle savedInstanceState) 
+{
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+
+b=(Button)findViewById(R.id.button1);
+b.setOnClickListener(this);
+
+nm=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+
+notify=new	Notification(android.R.drawable.btn_star,"Ticker Message", System.currentTimeMillis());
+
+CharSequence title="Android Batch";
+
+CharSequence details="Message for Android people";
+
+Intent intent=new Intent(this,MainActivity.class);
+
+PendingIntent pending=PendingIntent.getActivity(this,0, intent, 0);
+
+notify.setLatestEventInfo(this,title,details,pending);
+
+notify.sound=Uri.parse("android.resource://com.peers.notifications/"+R.raw.beep);
+
+long[] vibrate={1000,500,1000,500,1000,900};
+notify.vibrate = vibrate;
+}
+
+public void onClick(View v) 
+{
+nm.notify(0,notify);  //0 is id
+}
+}
+
+
+To get the effect of Vibration, we need to add the permission android.permission.VIBRATE in AndroidManifest.xml.
+
+*******************
+Add sounds for notifications
+
+You can alert the user with the default notification sound (which is defined by the user) or with a sound specified by your application.
+
+To use the user's default sound, add "DEFAULT_SOUND" to the defaults field:
+
+notify.defaults |= Notification.DEFAULT_SOUND;
+
+Create a new folder called "raw" in /res
+Place a sound file (beep..);
+
+//notify.sound=Uri.parse("android.resource://com.peers/"+R.raw.beep);
+
+****************
+Adding vibration
+
+notify.defaults |= Notification.DEFAULT_VIBRATE;
+
+long[] vibrate = {0,100,200,300};
+notify.vibrate = vibrate;
+
+// The first value is how long to wait (off) before beginning, the second value is the length of the first vibration, the third is the next length off, and so on.
+
+****************
+
+Adding flashing lights
+
+notify.defaults |= Notification.DEFAULT_LIGHTS;
+
+notify.ledARGB = 0xff00ff00;
+notify.ledOnMS = 300;
+notify.ledOffMS = 1000;
+notify.flags |= Notification.FLAG_SHOW_LIGHTS;
+
+In this example, the green light repeatedly flashes on for 300 milliseconds and turns off for one second. Not every color in the spectrum is supported by the device LEDs, and not every device supports the same colors, so the hardware estimates to the best of its ability. Green is the most common notification color.
+
+
+Toast Notification
+==================
+A toast notification is a message that pops up on the surface of the window. It only fills the amount of space required for the message and the user's current activity remains visible and interactive. The notification automatically fades in and out, and does not accept interaction events.
+
+Toast toast = Toast.makeText(context, text, duration);
+toast.show();
+
+Positioning your Toast
+----------------------
+A standard toast notification appears near the bottom of the screen, centered horizontally. You can change this position with the setGravity(int, int, int) method. This accepts three parameters: a Gravity constant, an x-position offset, and a y-position offset
+
+toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0); // If you want to nudge the position to the right, increase the value of the second parameter. To nudge it down, increase the value of the last parameter.
+
+Toast toast=Toast.makeText(Main.this,"This is some Toast",5000);
+toast.setGravity(Gravity.CENTER,0,0);
+toast.show();
+

@@ -1,0 +1,113 @@
+Theory
+------
+what is AsyncTask?
+is a abstract class.
+This class allows us to perform long/background operations and show its result on the UI thread without having to manipulate threads.
+
+When to use AsyncTask?
+            Android implements single thread model and whenever an android application is launched, a thread is created. Assuming we are doing network operation on a button click in our application. On button click a request would be made to the server and response will be awaited. Due to single thread model of android, till the time response is awaited our screen is non-responsive. So we should avoid performing long running operations on the UI thread. This includes file and network access.
+            To overcome this we can create new thread and implement run method to perform this network call, so UI remains responsive.
+            But since Android follows single thread model and Android UI toolkit is not thread safe, so if there is a need to make some change to the UI based on the result of the operation performed, then this approach may lead some issues.
+
+So the Android framework has given a very good pattern which is enveloped into AsyncTask.
+
+Note: AsyncTask should ideally be used for operations that take few seconds. Some tasks keep the thread running for long time so in that case it is recommended to use java.util.concurrent package such as Executor, ThreadPoolExecutor and FutureTask.
+
+AsyncTask has four steps:
+
+doInBackground: Code performing long running operation goes in this method.  When onClick method is executed on click of button, it calls execute method which accepts parameters and automatically calls doInBackground method with the parameters passed.
+onPostExecute: This method is called after doInBackground method completes processing. Result from doInBackground is passed to this method.
+onPreExecute: This method is called before doInBackground method is called.
+onProgressUpdate: This method is invoked by calling publishProgress anytime from doInBackground call this method.
+The task can be cancelled by invoking cancel(boolean) method. This will cause subsequent calls to isCancelled() to return true. After invoking this method, onCancelled(Object) method is called instead of onPostExecute() after doInBackground() returns. 
+
+programming
+-----------
+1 Declare Internet permissions in the manifest by adding the following line to AndroidManifest.xml. 
+
+2 Create your HttpClient and HttpPost objects to execute the POST request. 
+The address object is a String representing your POST's destination, such as a PHP page.
+
+HttpClient client = new DefaultHttpClient();
+HttpPost post = new HttpPost(address);
+
+3 Set your POST data. 
+This is done by creating and setting a list of NameValuePairs as your HttpPost's entity.
+ Be sure to catch the UnsupportedEncodingException thrown by HttpPost.setEntity().
+
+List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+pairs.add(new BasicNameValuePair("key1", "value1"));
+pairs.add(new BasicNameValuePair("key2", "value2"));
+post.setEntity(new UrlEncodedFormEntity(pairs));
+
+4 Execute the POST request. This returns an HttpResponse object, whose data can be extracted and parsed. Be sure to catch the ClientProtocolException and IOException thrown.
+
+HttpResponse response = client.execute(post);
+
+if we are getting data from the server no 3rd step.
+
+HttpEntity entity = response.getEntity();
+result = EntityUtils.toString(entity, HTTP.UTF_8).trim();
+
+toString(HttpEntity entity)
+Read the contents of an entity and return it as a String.
+
+
+HttpEntity
+----------
+public interface HttpEntity
+An entity that can be sent or received with an HTTP message. Entities can be found in some requests and in responses, where they are optional.
+There are three distinct types of entities in HttpCore, depending on where their content originates:
+
+streamed: The content is received from a stream, or generated on the fly. In particular, this category includes entities being received from a connection. Streamed entities are generally not repeatable.
+self-contained: The content is in memory or obtained by means that are independent from a connection or other entity. Self-contained entities are generally repeatable.
+wrapping: The content is obtained from another entity.
+This distinction is important for connection management with incoming entities. For entities that are created by an application and only sent using the HTTP components framework, the difference between streamed and self-contained is of little importance. In that case, it is suggested to consider non-repeatable entities as streamed, and those that are repeatable (without a huge effort) as self-contained.
+
+structure
+---------
+protected void onPreExecute()---dialogbox
+protected String doInBackground(String... args)----logic to get/post data
+protected void onPostExecute(String result)---disable dialogbox and parsing data into json/xml.
+
+
+we can set entity before and after execute method
+before
+ httppost.setEntity(new UrlEncodedFormEntity(postvalues, "UTF-8"));
+
+ // Execute HTTP Post Request
+ HttpResponse response = httpclient.execute(httppost);
+ return requestToString(response);
+
+after 
+HttpResponse response = httpclient.execute(httppost);
+HttpEntity entity = response.getEntity();
+result = EntityUtils.toString(entity, HTTP.UTF_8).trim();
+
+Methods:
+--------
+Get  
+method is used to retrieve (or read) a representation of a resource
+GET returns a representation in XML or JSON and an HTTP response code of 200 (OK)
+Put
+most-often utilized for update capabilities
+Post
+most-often utilized for creation of new resources
+
+Delete
+It is used to delete a resource identified by a URI.
+
+To create a resource on the server, use POST.
+To retrieve a resource, use GET.
+To change the state of a resource or to update it, use PUT.
+To remove or delete a resource, use DELETE.
+
+http://www.ibm.com/developerworks/library/ws-restful/
+
+window leaked error
+-------------------
+StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+StrictMode.setThreadPolicy(policy);
+
+
+

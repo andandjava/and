@@ -1,0 +1,5 @@
+accelerometer--orientation
+gyroscope--rate of rotation.
+mangetometer--directions
+proximit--able to detect the presence of nearby objects without any physical contact.
+          light off when u keep mobile nearer to ur ear.

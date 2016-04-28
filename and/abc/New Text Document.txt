@@ -1,0 +1,19 @@
+sharedpreferences
+-----------------
+xml file
+stores in key-value pair
+stores primitive data types like boolean,int,float,strings etc
+
+The SharedPreferences class provides a general framework that allows you to save and retrieve persistent key-value pairs of primitive data types. You can use SharedPreferences to save any primitive data: booleans, floats, ints, longs, and strings. This data will persist across user sessions (even if your application is killed).	
+To get a SharedPreferences object for your application, use one of two methods:
+
+getSharedPreferences() - Use this if you need multiple preferences files identified by name, which you specify with the first parameter.
+getPreferences() - Use this if you need only one preferences file for your Activity. Because this will be the only preferences file for your Activity, you don't supply a name.
+
+To write values:
+
+Call edit() to get a SharedPreferences.Editor.
+Add values with methods such as putBoolean() and putString().
+Commit the new values with commit()
+To read values, use SharedPreferences methods such as getBoolean() and getString().
+

@@ -1,0 +1,25 @@
+MainActivity.java
+=================
+public class MainActivity extends Activity 
+{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) 
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);    
+        
+        Button sButton = (Button) findViewById(R.id.button_s);
+        
+        // -- register click event with first button ---
+        sButton.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+               // --- find the text view --
+               TextView txtView = (TextView) findViewById(R.id.text_id);
+               // -- change text size --
+               txtView.setTextSize(14);
+           }
+        });
+   
+    }
+
+}

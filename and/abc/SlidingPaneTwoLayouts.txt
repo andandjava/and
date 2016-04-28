@@ -1,0 +1,481 @@
+Sliding Pane Layout
+=====================
+if we want to do the slide pane and main screen as two separate views then 
+
+slide pane---same
+middle screen--take it as FrameLayout and take a fragment initially loading through xml file
+
+after clicking the item in the slide pane..it will creates a fragment and replaces the already existing fragment in the main screen using java code.
+
+
+Program
+=======
+activity_main.xml
+=================
+     <android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SlidingPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+            
+         <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                 android:layout_gravity="left"
+                 android:background="#323232"
+                android:orientation="vertical"
+                android:paddingLeft="10dp" >
+                
+             
+                 <include
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     layout="@layout/activity_slide" />
+                
+      
+                
+          </LinearLayout>
+    
+         <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 android:layout_gravity="right"
+                 android:background="#323232"
+                android:layout_weight="0.8"
+                android:orientation="vertical"
+                android:paddingLeft="10dp" >
+
+                <ImageButton
+                    android:id="@+id/icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:background="#323232"
+                    android:onClick="fun"
+                    android:src="@drawable/icon" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.1dp"
+                    android:background="#000000" />
+                
+                      <FrameLayout
+                android:id="@+id/layout14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              
+                 android:background="#323232"
+          
+                android:orientation="vertical"
+                android:paddingLeft="10dp" >
+                
+                 <fragment
+                 android:id="@+id/fragment1"
+                 android:name="com.example.designapp9.MainFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
+                 </FrameLayout>
+
+                
+                </LinearLayout>
+              
+    
+     </android.support.v4.widget.SlidingPaneLayout>
+
+activity_slide.xml
+==================
+     <android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SlidingPanel"
+    android:layout_width="240dp"
+    android:layout_height="match_parent" >
+     
+     <LinearLayout 
+        android:id="@+id/linearlayout"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+       android:background="#323232"
+        
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textCatogories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:text="CATOGORIES"
+            android:textColor="#b2b2b2" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:clickable="true"
+                    android:onClick="popularfun"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/popular" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                   android:clickable="true"
+                   android:onClick="popularfun"
+                    android:text="Popular Fragment"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:clickable="true"
+                    android:onClick="followingfun"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/following" />
+
+                <TextView
+                    android:id="@+id/textfollowing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                   
+                   
+                    android:text="Following"
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:clickable="true"
+                    android:onClick="debutsfun"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/debut" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Debut"
+                   
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                    android:clickable="true"
+                    android:onClick="everyonefun"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/everyone" /> m
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Everyone"
+                    
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="PROFILE"
+            android:textColor="#b2b2b2" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.1dp"
+            android:background="#000000" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp" >
+
+            <TableRow
+                android:id="@+id/tableRow21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:clickable="true"
+                android:onClick="usernamefun">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="User Name"
+
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#ff6600"
+                    android:text="PRO"
+                    android:textColor="#ffffff"
+                    android:textSize="9sp" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                    android:onClick="logoutfun"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/logout" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Logout"
+                    
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+      
+        </TableLayout>
+    </LinearLayout>
+    
+    
+    
+    
+     
+    
+     </android.support.v4.widget.SlidingPaneLayout>
+
+MainActivity.java
+=================
+package com.example.designapp9;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	SlidingPaneLayout mSlidingPanel;
+	ListView mMenuList;
+	ImageView appImage;
+	TextView TitleText, tv1, tv2;
+	LinearLayout layout5;
+	FragmentManager manager;
+
+	// String [] MenuTitles = new
+	// String[]{"First Item","Second Item","Third Item","Fourth Item"};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		mSlidingPanel = (SlidingPaneLayout) findViewById(R.id.SlidingPanel);
+		// mMenuList = (ListView) findViewById(R.id.MenuList);
+		appImage = (ImageView) findViewById(android.R.id.home);
+		TitleText = (TextView) findViewById(android.R.id.title);
+		layout5 = (LinearLayout) findViewById(R.id.layout4);
+		long n = mSlidingPanel.getDrawingTime();
+		Toast.makeText(getApplicationContext(), "DrawingTime is" + n, 1).show();
+
+		// mMenuList.setAdapter(new ArrayAdapter(this,
+		// android.R.layout.simple_list_item_1,MenuTitles));
+
+		mSlidingPanel.setPanelSlideListener(panelListener);
+		mSlidingPanel.setParallaxDistance(200);
+		// mSlidingPanel.setShadowResourceLeft(R.drawable.shado);
+		mSlidingPanel.setSliderFadeColor(Color.TRANSPARENT);
+		// mSlidingPanel.setShadowResource(R.drawable.es_slidingpane_shadow);
+	}
+
+	PanelSlideListener panelListener = new PanelSlideListener() {
+
+		@Override
+		public void onPanelClosed(View arg0) {
+
+			// mSlidingPanel.setShadowResourceLeft(R.drawable.black);
+
+		}
+
+		@Override
+		public void onPanelOpened(View arg0) {
+
+			// mSlidingPanel.setShadowResourceLeft(R.drawable.ic_launcher);
+			// mSlidingPanel.setScrimColor(Color.TRANSPARENT); for Navigable
+			mSlidingPanel.setShadowResourceLeft(R.drawable.shadow);
+			mSlidingPanel.setSliderFadeColor(Color.TRANSPARENT);
+
+		}
+
+		@Override
+		public void onPanelSlide(View arg0, float arg1) {
+
+		}
+	};
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if (mSlidingPanel.isOpen()) {
+			
+				mSlidingPanel.closePane();
+				mSlidingPanel.smoothSlideOpen();
+
+				// getActionBar().setTitle(getString(R.string.app_name));
+				getActionBar().setTitle("Main Menu");
+				Toast.makeText(getApplicationContext(), "u clickeddd 1", 1)
+						.show();
+			} else {
+				
+				mSlidingPanel.openPane();
+				getActionBar().setTitle("Menu Titles");
+				Toast.makeText(getApplicationContext(), "u clickleddd 2", 1)
+						.show();
+			}
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	public void fun(View v) {
+		mSlidingPanel.openPane();
+	}
+	public void popularfun(View v)
+	{
+		PopularActivity pf=new PopularActivity();
+		manager=getFragmentManager();
+		FragmentTransaction transaction=manager.beginTransaction();
+		transaction.replace(R.id.layout14, pf, "popular");
+		transaction.commit();
+		mSlidingPanel.closePane();
+	}
+}

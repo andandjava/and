@@ -1,0 +1,10 @@
+getting sdcard path
+-------------------
+File f=Environment.getExternalStorageDirectory();
+String filepath=f.getAbosolutePath()+"/somefile.mp3";
+
+To Uninstall App
+----------------
+Intent i=new Intent(Intent.ACTION_DELETE);				
+i.setData(Uri.parse("package:com.example.stringtest"));
+startActivity(i);

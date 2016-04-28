@@ -1,0 +1,126 @@
+Audio
+=====
+activity_main.xml
+=================
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="91dp"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_marginLeft="23dp"
+        android:layout_toRightOf="@+id/button1"
+        android:text="Pause" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_marginLeft="26dp"
+        android:layout_toRightOf="@+id/button2"
+        android:text="Stop" />
+
+
+
+</RelativeLayout>
+
+MainActivity.java
+=================
+
+package com.example.audio;
+
+
+import android.app.Activity;
+
+import android.media.MediaPlayer;
+
+import android.os.Bundle;
+
+import android.view.View;
+
+import android.view.View.OnClickListener;
+
+import android.widget.Button;
+
+
+
+public class MainActivity extends Activity implements OnClickListener 
+{
+
+	
+	Button b1, b2, b3;
+	
+	MediaPlayer mp;
+
+
+
+	@Override
+	
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		
+	super.onCreate(savedInstanceState);
+		
+	setContentView(R.layout.activity_main);
+
+		
+	mp = MediaPlayer.create(this, R.raw.song);
+
+		
+	b1 = (Button) findViewById(R.id.button1);
+		
+	b2 = (Button) findViewById(R.id.button2);
+		
+	b3 = (Button) findViewById(R.id.button3);
+
+		
+	b1.setOnClickListener(this);
+		
+	b2.setOnClickListener(this);
+		
+	b3.setOnClickListener(this);
+	
+	}
+
+		
+	
+	@Override
+	
+	public void onClick(View v) 
+	{
+
+		
+		if (v == b1)
+			
+		mp.start();
+		
+		else if (v == b2)
+			
+		mp.pause();
+		
+		else
+			
+		mp.stop();
+
+	
+	}
+
+}

@@ -1,0 +1,157 @@
+View Flipper
+============
+moving images/text/button etc from left to right/left when button clicked and stopped when button clicked .
+
+activity_main.xml
+=================
+two buttons(previous,next)(start,stop)
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/prev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="previous" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="next" />
+    </LinearLayout>
+    
+
+    <ViewFlipper
+        android:id="@+id/viewflipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- Button 2 -" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LinearLayout 2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter something" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LinearLayout 3" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ViewFlipper is a simple ViewAnimator that 
+     will animate between two or more views that 
+     have been added to it. Only one child is shown 
+     at a time. If requested, can automatically 
+     flip between each child at a regular interval." />
+    </ViewFlipper>
+
+</LinearLayout>
+
+MainActivity.java
+=================
+package com.example.viewflipperapp;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ViewFlipper;
+
+	public class MainActivity extends Activity {
+
+		 Button buttonPrev, buttonNext;
+		 ViewFlipper viewFlipper;
+
+		 Animation slide_in_left, slide_out_right;
+
+		 @Override
+		 protected void onCreate(Bundle savedInstanceState) {
+		  super.onCreate(savedInstanceState);
+		  setContentView(R.layout.activity_main);
+
+		  buttonPrev = (Button) findViewById(R.id.prev);
+		  buttonNext = (Button) findViewById(R.id.next);
+		  viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
+
+		  slide_in_left = AnimationUtils.loadAnimation(this,android.R.anim.slide_in_left);
+		  slide_out_right = AnimationUtils.loadAnimation(this,android.R.anim.slide_out_right);
+		 
+		  viewFlipper.setFlipInterval(500);
+		  
+		  
+
+		  viewFlipper.setInAnimation(slide_in_left);
+		  viewFlipper.setOutAnimation(slide_out_right);
+
+		  buttonPrev.setOnClickListener(new OnClickListener() {
+
+		   @Override
+		   public void onClick(View arg0) {
+		    //viewFlipper.showPrevious();
+			   viewFlipper.startFlipping();
+		   }
+		  });
+
+		  buttonNext.setOnClickListener(new OnClickListener() {
+
+		   @Override
+		   public void onClick(View arg0) {
+		    //viewFlipper.showNext();
+			   viewFlipper.stopFlipping();
+		   }
+		  });
+		  ;
+		 }
+
+		}

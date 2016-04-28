@@ -1,0 +1,30 @@
+changing normally
+-----------------
+
+Typeface Lato_Regular = Typeface.createFromAsset(getApplicationContext()
+					.getAssets(), "LATO-BOLD.TTF");
+Typeface Lato_Bold = Typeface.createFromAsset(getApplicationContext()
+					.getAssets(), "LATO-REGULAR_0.TTF");
+
+
+
+changing using setters and getters
+----------------------------------
+
+Typeface LUCIDA_GRANDE_BOLD;
+
+
+public void setTf_lucida_grande_bold(Typeface tf_lucida_grande_bold) {
+		this.LUCIDA_GRANDE_BOLD = tf_lucida_grande_bold;
+	}
+
+	public static Typeface getTf_lucida_grande_bold(Context context) {
+		return Typeface.createFromAsset(context.getAssets(),
+				"LUCIDA GRANDE BOLD.TTF");
+	}
+
+
+
+
+
+t1.setTypeface(Classname.getTf_lucida_grande(getApplicationContext()));

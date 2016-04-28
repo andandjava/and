@@ -1,0 +1,69 @@
+MainActivity.java
+=================
+public class MainActivity extends Activity implements OnClickListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        //--- find both the buttons---
+        Button sButton = (Button) findViewById(R.id.button_s);
+        Button lButton = (Button) findViewById(R.id.button_l);
+        
+        
+        // -- register click event with first button ---
+        sButton.setOnClickListener(this);
+        // -- register click event with second button ---
+        lButton.setOnClickListener(this);
+    }
+        
+    //--- Implement the OnClickListener callback
+    public void onClick(View v) {
+       if(v.getId() == R.id.button_s)
+       { 
+            // --- find the text view --
+            TextView txtView = (TextView) findViewById(R.id.text_id);
+            // -- change text size --
+            txtView.setTextSize(14);
+            return;
+       }
+       if(v.getId() == R.id.button_l)
+       { 
+            // --- find the text view --
+            TextView txtView = (TextView) findViewById(R.id.text_id);
+            // -- change text size --
+            txtView.setTextSize(24);
+            return;
+       }
+    }
+}
+activity_main.xml
+=================
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:orientation="vertical" >
+
+
+    <Button 
+    android:id="@+id/button_s"
+    android:layout_height="wrap_content" 
+    android:layout_width="match_parent" 
+    android:text="@string/button_small"/>
+    
+    <Button 
+    android:id="@+id/button_l"
+    android:layout_height="wrap_content" 
+    android:layout_width="match_parent" 
+    android:text="@string/button_large"/>
+
+    <TextView
+    android:id="@+id/text_id"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:capitalize="characters"
+    android:text="@string/hello_world" />
+
+</LinearLayout>

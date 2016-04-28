@@ -1,0 +1,109 @@
+public class MainActivity extends Activity {
+
+	TextView tv, textSlot, textPoints;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		
+		new DemoAsyTask().execute();
+
+	}
+
+	private class DemoAsyTask extends AsyncTask<String, Void, String> {
+
+		private ProgressDialog progressDialog;
+		JSONObject jsonResponse;
+
+		@Override
+		protected void onPreExecute() {
+
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(MainActivity.this);
+			progressDialog.setMessage("Loading ...");
+			progressDialog.setIndeterminate(false);
+			progressDialog.setCancelable(false);
+			progressDialog.show();
+
+		}
+
+		@Override
+		protected String doInBackground(String... args) {
+			HttpClient httpclient = new DefaultHttpClient();
+
+			HttpPost httppost = new HttpPost(
+					"http://dev.eatz.com/WebServices/getslots/1373/Lunch/2015-3-26/12");
+
+			String result = null;
+			try {
+
+				// Execute HTTP Post Request
+				HttpResponse response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				//string result=EntityUtils.toString(entity, default charset).trim();
+				result = EntityUtils.toString(entity, HTTP.UTF_8).trim();
+
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			}
+			return result;
+
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			System.out.println("result1" + result);
+
+			if (null != progressDialog && progressDialog.isShowing()) {
+				progressDialog.dismiss();
+			}
+
+			Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+			tv.setText("\n" + result);
+
+			try {
+				//parsing json data
+
+				String OutputData = "";
+				jsonResponse = new JSONObject(result);
+				JSONArray jsonArray = jsonResponse.optJSONArray("Slots");
+				int lengthJsonArr = jsonArray.length();
+				for (int i = 0; i < lengthJsonArr; i++) {
+					JSONObject jsonChildNode = jsonArray.getJSONObject(i);
+
+					/******* Fetch node values **********/
+					// int slot =
+					// Integer.parseInt(jsonChildNode.optString("slot")
+					// .toString());
+					// int points = Integer.parseInt(jsonChildNode.optString(
+					// "points").toString());
+
+					String slot = jsonChildNode.optString("slot").toString();
+					String points = jsonChildNode.optString("points")
+							.toString();
+
+					OutputData += " " + slot + " | " + points + " \n ";
+
+					tv.setText(OutputData);
+					textSlot.append("\n" + slot);
+					textPoints.append("\n" + points);
+				}
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void perform(View v) {
+
+		Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+		startActivity(intent);
+	}
+}

@@ -1,0 +1,1335 @@
+Expandable ListView
+====================
+upto 10 levels.
+
+Items.java
+-----------
+package com.example.expandablelistview_level3copy;
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * first level item
+ * 
+ */
+public class Items {
+
+	private String gid1;
+	public String getGid1() {
+		return gid1;
+	}
+
+	public void setGid1(String gid1) {
+		this.gid1 = gid1;
+	}
+
+	private String pName;
+	private ArrayList<SubCategory> mSubCategoryList;
+
+	public Items(String gid1,String pName, ArrayList<SubCategory> mSubCategoryList) {
+		super();
+		this.gid1=gid1;
+		this.pName = pName;
+		this.mSubCategoryList = mSubCategoryList;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+
+	public ArrayList<SubCategory> getmSubCategoryList() {
+		return mSubCategoryList;
+	}
+
+	public void setmSubCategoryList(ArrayList<SubCategory> mSubCategoryList) {
+		this.mSubCategoryList = mSubCategoryList;
+	}
+
+	//second level item-item2
+	public static class SubCategory {
+
+		private String gid2;
+		public String getGid2() {
+			return gid2;
+		}
+
+		public void setGid2(String gid2) {
+			this.gid2 = gid2;
+		}
+
+		private String pSubCatName;
+		private ArrayList<ItemList> mItemListArray;
+
+		public SubCategory(String gid2,String pSubCatName,
+				ArrayList<ItemList> mItemListArray) {
+			super();
+			this.gid2=gid2;
+			this.pSubCatName = pSubCatName;
+			this.mItemListArray = mItemListArray;
+		}
+
+		public String getpSubCatName() {
+			return pSubCatName;
+		}
+
+		public void setpSubCatName(String pSubCatName) {
+			this.pSubCatName = pSubCatName;
+		}
+
+		public ArrayList<ItemList> getmItemListArray() {
+			return mItemListArray;
+		}
+
+		public void setmItemListArray(ArrayList<ItemList> mItemListArray) {
+			this.mItemListArray = mItemListArray;
+		}
+
+//		third level item-item3
+		public static class ItemList {
+
+			private String gid3;
+			public String getGid3() {
+				return gid3;
+			}
+
+			public void setGid3(String gid3) {
+				this.gid3 = gid3;
+			}
+
+			private String itemName;
+			// private String itemPrice;
+			ArrayList<AvailableList> mAvailableList;
+
+			// public ItemList(String itemName, String itemPrice) {
+			// super();
+			// this.itemName = itemName;
+			// // this.itemPrice = itemPrice;
+			// }
+			public ItemList(String gid3,String itemName,
+					ArrayList<AvailableList> mAvailableList) {
+				super();
+				this.gid3=gid3;
+				this.itemName = itemName;
+				// this.itemPrice = itemPrice;
+				this.mAvailableList = mAvailableList;
+			}
+
+			public ArrayList<AvailableList> getmAvailableList() {
+				return mAvailableList;
+			}
+
+			public void setmAvailableList(
+					ArrayList<AvailableList> mAvailableList) {
+				this.mAvailableList = mAvailableList;
+			}
+
+			public String getItemName() {
+				return itemName;
+			}
+
+			public void setItemName(String itemName) {
+				this.itemName = itemName;
+			}
+
+			// public String getItemPrice() {
+			// return itemPrice;
+			// }
+			//
+			// public void setItemPrice(String itemPrice) {
+			// this.itemPrice = itemPrice;
+			// }
+
+		}
+//		fourth level item-item4
+		public static class AvailableList {
+
+			private String gid4;
+			private String avail;
+			ArrayList<LocationList> mLocationList;
+			
+			public String getGid4() {
+				return gid4;
+			}
+
+			public void setGid4(String gid4) {
+				this.gid4 = gid4;
+			}
+
+			
+			
+
+			public ArrayList<LocationList> getmLocationList() {
+				return mLocationList;
+			}
+
+			public void setmLocationList(ArrayList<LocationList> mLocationList) {
+				this.mLocationList = mLocationList;
+			}
+
+			public String getAvail() {
+				return avail;
+			}
+
+			public void setAvail(String avail) {
+				this.avail = avail;
+			}
+
+			public AvailableList(String gid4,String avail,
+					ArrayList<LocationList> mLocationList) {
+				this.gid4=gid4;
+				this.avail = avail;
+				this.mLocationList = mLocationList;
+			}
+
+		}
+
+//		 public static class AvailableList{
+//		
+//		 private String avail;
+//		 public String getAvail() {
+//		 return avail;
+//		 }
+//		 public void setAvail(String avail) {
+//		 this.avail = avail;
+//		 }
+//		 public AvailableList(String avail)
+//		 {
+//		 this.avail=avail;
+//		 }
+//		
+//		 }
+
+		// public static class PriceList{
+		//
+		// private String price;
+		// public String getPrice() {
+		// return price;
+		// }
+		// public void setPrice(String price) {
+		// this.price = price;
+		// }
+		// public PriceList(String price)
+		// {
+		// this.price=price;
+		// }
+		// }
+//		fifth level item-item5
+		public static class LocationList {
+
+			private String gid5;
+			private String location;
+			ArrayList<PriceList> mPriceList;
+			
+			public LocationList(String gid5,String location,ArrayList<PriceList> mPriceList) {
+				this.gid5=gid5;
+				this.location = location;
+				this.mPriceList=mPriceList;
+			}
+			
+			public String getGid5() {
+				return gid5;
+			}
+
+			public void setGid5(String gid5) {
+				this.gid5 = gid5;
+			}
+
+			
+
+			public String getLocation() {
+				return location;
+			}
+
+			public void setLocation(String location) {
+				this.location = location;
+			}
+
+			public ArrayList<PriceList> getmPriceList() {
+				return mPriceList;
+			}
+
+			public void setmPriceList(ArrayList<PriceList> mPriceList) {
+				this.mPriceList = mPriceList;
+			}
+			
+		}
+//		fifth level item-item5
+		public static class PriceList {
+
+			private String gid6;
+			private String price;
+			ArrayList<PaymentList> mPaymentList;
+			public ArrayList<PaymentList> getmPaymentList() {
+				return mPaymentList;
+			}
+
+
+			public void setmPaymentList(ArrayList<PaymentList> mPaymentList) {
+				this.mPaymentList = mPaymentList;
+			}
+
+
+			public String getGid6() {
+				return gid6;
+			}
+
+
+			public void setGid6(String gid6) {
+				this.gid6 = gid6;
+			}
+
+
+			public String getPrice() {
+				return price;
+			}
+
+
+			public void setPrice(String price) {
+				this.price = price;
+			}
+
+			public PriceList(String gid6,String price,ArrayList<PaymentList> mPaymentList) {
+				this.gid6=gid6;
+				this.price = price;
+				this.mPaymentList=mPaymentList;
+			}
+		}
+		public static class PaymentList {
+
+			private String gid7;
+			private String payment;
+			ArrayList<DeliveryList> mDeliveryList;
+			
+			public ArrayList<DeliveryList> getmDeliveryList() {
+				return mDeliveryList;
+			}
+
+			public void setmDeliveryList(ArrayList<DeliveryList> mDeliveryList) {
+				this.mDeliveryList = mDeliveryList;
+			}
+
+			public PaymentList(String gid7,String payment,ArrayList<DeliveryList> mDeliveryList) {
+				this.gid7=gid7;
+				this.payment = payment;
+				this.mDeliveryList=mDeliveryList;
+			}
+			
+			public String getGid7() {
+				return gid7;
+			}
+			public void setGid7(String gid7) {
+				this.gid7 = gid7;
+			}
+			public String getPayment() {
+				return payment;
+			}
+			public void setPayment(String payment) {
+				this.payment = payment;
+			}
+			
+		
+		}
+		public static class DeliveryList {
+
+			private String gid8;
+			private String delivery;
+			ArrayList<OffersList> mOfferList;
+			
+			public ArrayList<OffersList> getmOfferList() {
+				return mOfferList;
+			}
+
+			public void setmOfferList(ArrayList<OffersList> mOfferList) {
+				this.mOfferList = mOfferList;
+			}
+
+			public String getGid8() {
+				return gid8;
+			}
+
+			public void setGid8(String gid8) {
+				this.gid8 = gid8;
+			}
+
+			public String getDelivery() {
+				return delivery;
+			}
+
+			public void setDelivery(String delivery) {
+				this.delivery = delivery;
+			}
+
+			
+			
+			public DeliveryList(String gid8,String delivery,ArrayList<OffersList> mOfferList) {
+				this.gid8=gid8;
+				this.delivery = delivery;
+				this.mOfferList=mOfferList;
+			}
+			
+		}
+		
+		public static class OffersList {
+
+			private String gid9;
+			private String offer;
+			ArrayList<FeedbackList> mFeedbackList;
+			
+			public OffersList(String gid9,String offer,ArrayList<FeedbackList> mFeedbackList) {
+				this.gid9=gid9;
+				this.offer = offer;
+				this.mFeedbackList=mFeedbackList;
+			}
+			
+			public ArrayList<FeedbackList> getmFeedbackList() {
+				return mFeedbackList;
+			}
+
+			public void setmFeedbackList(ArrayList<FeedbackList> mFeedbackList) {
+				this.mFeedbackList = mFeedbackList;
+			}
+
+			public String getGid9() {
+				return gid9;
+			}
+			public void setGid9(String gid9) {
+				this.gid9 = gid9;
+			}
+			public String getOffer() {
+				return offer;
+			}
+			public void setOffer(String offer) {
+				this.offer = offer;
+			}
+			
+		}
+		public static class FeedbackList {
+
+			private String gid10;
+			public String getGid10() {
+				return gid10;
+			}
+
+			public void setGid10(String gid10) {
+				this.gid10 = gid10;
+			}
+
+			public String getFeedback() {
+				return feedback;
+			}
+
+			public void setFeedback(String feedback) {
+				this.feedback = feedback;
+			}
+
+			private String feedback;
+			
+			public FeedbackList(String gid10,String feedback) {
+				this.gid10=gid10;
+				this.feedback = feedback;
+			}
+		}
+	}
+
+}
+MainActivity.java
+------------------
+package com.example.expandablelistview_level3copy;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.expandablelistview_level3copy.Items.SubCategory;
+import com.example.expandablelistview_level3copy.Items.SubCategory.AvailableList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.DeliveryList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.FeedbackList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.ItemList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.LocationList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.OffersList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.PaymentList;
+import com.example.expandablelistview_level3copy.Items.SubCategory.PriceList;
+
+ 
+public class MainActivity extends Activity 
+{
+	private ArrayList<Items>mainList;
+	private ArrayList<SubCategory>subArrayList1;
+	private ArrayList<SubCategory>subArrayList2;
+	private LinearLayout mLinearListView;
+	boolean isFirstViewClick=false;
+	boolean isSecondViewClick=false;
+	boolean isThirdViewClick=false;
+	boolean isFourthViewClick=false;
+	boolean isFifthViewClick=false;
+	boolean isSixthViewClick=false;
+	boolean isSeventhViewClick=false;
+	boolean isEighthViewClick=false;
+	boolean isNinthViewClick=false;
+	boolean isTenthViewClick=false;
+	
+	public String gid1,gid2,gid3,gid4,gid5,gid6,gid7,gid8,gid9,gid10;
+	TextView txt;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		txt=(TextView) findViewById(R.id.txt);
+		mLinearListView = (LinearLayout) findViewById(R.id.linear_ListView);
+		
+		//Make array list one is for mainlist and other is for sublist
+		//level1
+		mainList=new ArrayList<Items>();
+	
+		//level2
+		subArrayList1=new ArrayList<SubCategory>();
+		subArrayList2=new ArrayList<SubCategory>();
+		
+		//level3
+		ArrayList<ItemList> subArrayListItem1=new ArrayList<ItemList>();
+		ArrayList<ItemList> subArrayListItem2=new ArrayList<ItemList>();
+		ArrayList<ItemList> subArrayListItem3=new ArrayList<ItemList>();
+
+		//level4
+		ArrayList<AvailableList> availablelist1=new ArrayList<AvailableList>();
+		ArrayList<AvailableList> availablelistn=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist2=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist3=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist4=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist5=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist6=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist7=new ArrayList<AvailableList>();
+//		ArrayList<AvailableList> availablelist8=new ArrayList<AvailableList>();
+		
+		//level5
+		ArrayList<LocationList> locationlist1=new ArrayList<LocationList>();
+		ArrayList<LocationList> locationlistn=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist2=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist3=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist4=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist5=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist6=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist7=new ArrayList<LocationList>();
+//		ArrayList<LocationList> locaitonlist8=new ArrayList<LocationList>();
+		
+		//level6+
+		
+		ArrayList<PriceList> pricelist1=new ArrayList<PriceList>();
+		ArrayList<PriceList> pricelistn=new ArrayList<PriceList>(); 
+//		ArrayList<PriceList> pricelist2=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist3=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist4=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist5=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist6=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist7=new ArrayList<PriceList>();
+//		ArrayList<PriceList> pricelist8=new ArrayList<PriceList>();
+		
+		//level7
+		
+		ArrayList<PaymentList> paymentlist1=new ArrayList<PaymentList>();
+		ArrayList<PaymentList> paymentlistn=new ArrayList<PaymentList>();
+		
+		//level8
+		ArrayList<DeliveryList> deliverylist1=new ArrayList<DeliveryList>();
+		ArrayList<DeliveryList> deliverylistn=new ArrayList<DeliveryList>();
+		
+		//level9
+		ArrayList<OffersList> offerlist1=new ArrayList<OffersList>();
+		ArrayList<OffersList> offerlistn=new ArrayList<OffersList>();
+		
+		//level10
+		ArrayList<FeedbackList> feedbacklist1=new ArrayList<FeedbackList>();
+		ArrayList<FeedbackList> feedbacklistn=new ArrayList<FeedbackList>();
+		
+		
+		//This arraylists are used to put items in sublists
+	
+		
+		//Add main categories in Mainlists along with their items it
+		
+		//gid1
+				mainList.add(new Items("0","Mobiles", subArrayList1));
+				mainList.add(new Items("1","cars", subArrayList2));
+				
+				//Add arrylist in category
+//				gid2
+				subArrayList1.add(new SubCategory("00","Motorola", subArrayListItem1));
+				subArrayList2.add(new SubCategory("11","Audi", subArrayListItem2));
+//				subArrayList2.add(new SubCategory("12","BMW", subArrayListItem3));
+				
+//				gid3
+				subArrayListItem1.add(new ItemList("000","Moto X",availablelist1));
+				subArrayListItem1.add(new ItemList("001","Moto G",availablelist1));
+				subArrayListItem1.add(new ItemList("002","Moto E",availablelist1));
+				subArrayListItem2.add(new ItemList("110","Audi R8",availablelist1));
+				subArrayListItem2.add(new ItemList("111","Audi A6",availablelist1));
+				subArrayListItem2.add(new ItemList("112","Audi Q3",availablelist1));
+//				subArrayListItem3.add(new ItemList("120"," BMW X6",availablelist7));
+//				subArrayListItem3.add(new ItemList("121","BMW 5 Series",availablelist8));
+				
+//				gid4
+				availablelist1.add(new AvailableList("0000","available1",locationlist1));
+//				availablelistn.add(new AvailableList("0000","",locationlistn));
+				availablelistn.add(null);
+//				availablelist1.add(new AvailableList("0001","available1",locaitonlist2));
+//				availablelist2.add(new AvailableList("0010","available2",locaitonlist1));
+//				availablelist3.add(new AvailableList("0020","available3",locaitonlist1));
+//				availablelist4.add(new AvailableList("1101","available4",locaitonlist1));
+//				availablelist5.add(new AvailableList("1110","available5",locaitonlist1));
+//				availablelist6.add(new AvailableList("1120","available6",locaitonlist1));
+//				availablelist7.add(new AvailableList("1200","available7",locaitonlist1));
+//				availablelist8.add(new AvailableList("1210","available8",locaitonlist1));
+				
+//				gid5
+				locationlist1.add(new LocationList("00000","Hyderabad",pricelist1));
+				locationlistn.add(new LocationList("00000","",pricelistn));
+//				locaitonlist1.add(new LocationList("00001","Hyderabad",pricelist2));
+//				locaitonlist2.add(new LocationList("00100","Banglore",pricelist1));
+//				locaitonlist3.add(new LocationList("00200","Chennai",pricelist1));
+//				locaitonlist4.add(new LocationList("11010","Mumbai",pricelist1));
+//				locaitonlist5.add(new LocationList("11100","Culcutta",pricelist1));
+//				locaitonlist6.add(new LocationList("11200","Lucknow",pricelist1));
+//				locaitonlist7.add(new LocationList("12000","Pune",pricelist1));
+//				locaitonlist8.add(new LocationList("12100","Thrivendrum",pricelist1));
+				
+				//gid6
+				pricelist1.add(new PriceList("000000", "10000",paymentlist1));
+				pricelistn.add(new PriceList("000000", "",paymentlistn));
+				
+				//gid7
+				paymentlist1.add(new PaymentList("0101010", "debit card",deliverylist1));
+				paymentlist1.add(new PaymentList("0101010", "credit card",deliverylist1));
+				paymentlistn.add(new PaymentList("0101010", "",deliverylistn));
+				
+				//gid8
+				deliverylist1.add(new DeliveryList("01010101", "delivery1",offerlist1));
+				deliverylistn.add(new DeliveryList("01010101", "",offerlistn));
+				
+				//gid9
+				offerlist1.add(new OffersList("0101010", "offer1",feedbacklistn));
+				offerlistn.add(new OffersList("0101010", "",feedbacklistn));
+				
+				//gid10
+				feedbacklist1.add(new FeedbackList("1010101010", "feedback1"));
+				feedbacklistn.add(new FeedbackList("1010101010", ""));
+//		//gid1
+//		mainList.add(new Items("1","Mobiles", subArrayList1));
+//		mainList.add(new Items("2","cars", subArrayList2));
+//		
+//		//Add arrylist in category
+////		gid2
+//		subArrayList1.add(new SubCategory("1","Motorola", subArrayListItem1));
+//		subArrayList2.add(new SubCategory("2","Audi", subArrayListItem2));
+//		subArrayList2.add(new SubCategory("3","BMW", subArrayListItem3));
+//		
+////		gid3
+//		subArrayListItem1.add(new ItemList("1","Moto X",availablelist1));
+//		subArrayListItem1.add(new ItemList("2","Moto G",availablelist2));
+//		subArrayListItem1.add(new ItemList("3","Moto E",availablelist3));
+//		subArrayListItem2.add(new ItemList("4","Audi R8",availablelist4));
+//		subArrayListItem2.add(new ItemList("5","Audi A6",availablelist5));
+//		subArrayListItem2.add(new ItemList("6","Audi Q3",availablelist6));
+//		subArrayListItem3.add(new ItemList("7"," BMW X6",availablelist7));
+//		subArrayListItem3.add(new ItemList("8","BMW 5 Series",availablelist8));
+//		
+////		gid4
+//		availablelist1.add(new AvailableList("1","Not available1",locaitonlist1));
+//		availablelist1.add(new AvailableList("2","available1",locaitonlist2));
+//		availablelist2.add(new AvailableList("3","available2",locaitonlist2));
+//		availablelist3.add(new AvailableList("4","available3",locaitonlist3));
+//		availablelist4.add(new AvailableList("5","Not available4",locaitonlist1));
+//		availablelist4.add(new AvailableList("6","available4",locaitonlist4));
+//		availablelist5.add(new AvailableList("7","available5",locaitonlist5));
+//		availablelist6.add(new AvailableList("8","available6",locaitonlist6));
+//		availablelist7.add(new AvailableList("9","available7",locaitonlist7));
+//		availablelist8.add(new AvailableList("10","available8",locaitonlist8));
+//		
+////		gid5
+//		locaitonlist1.add(new LocationList("1","Hyderabad"));
+//		locaitonlist2.add(new LocationList("2","Banglore"));
+//		locaitonlist3.add(new LocationList("3","Chennai"));
+//		locaitonlist4.add(new LocationList("4","Mumbai"));
+//		locaitonlist5.add(new LocationList("5","Culcutta"));
+//		locaitonlist6.add(new LocationList("6","Lucknow"));
+//		locaitonlist7.add(new LocationList("7","Pune"));
+//		locaitonlist8.add(new LocationList("8","Thrivendrum"));
+ 
+		//Add items means arrylist
+//		subArrayListItem1.add(new ItemList("Moto X", "29999"));
+//		subArrayListItem1.add(new ItemList("Moto G", "12999"));
+//		subArrayListItem1.add(new ItemList("Moto E", "6999"));
+		
+//		subArrayListItem2.add(new ItemList("Audi R8", "1.57c-2.14"));
+//		subArrayListItem2.add(new ItemList("Audi A6", "49L-51L"));
+//		subArrayListItem2.add(new ItemList("Audi Q3", "28L-37L"));
+	
+		
+//		subArrayListItem3.add(new ItemList(" BMW X6", "1.15c"));
+//		subArrayListItem3.add(new ItemList("BMW 5 Series", "40L-60L"));
+		
+//		subArrayList2.add(new SubCategory("Covers", subArrayListItem2));
+//		subArrayList2.add(new SubCategory("Headphones", subArrayListItem3));
+//		
+//		subArrayListItem2.add(new ItemList("FlipCover", "599"));
+//		subArrayListItem2.add(new ItemList("pouch", "249"));
+//		subArrayListItem2.add(new ItemList("BackCover", "499"));
+//		
+//		subArrayListItem3.add(new ItemList("Wired Headphones", "399"));
+//		subArrayListItem3.add(new ItemList("Wireless Headphones", "1999"));
+	
+		//Adds data into first row
+		for (int i = 0; i < mainList.size(); i++) 
+		{
+			
+			LayoutInflater inflater = null;
+			inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View mLinearView = inflater.inflate(R.layout.row_first, null);
+			
+			final TextView mProductName = (TextView) mLinearView.findViewById(R.id.textViewName);
+			final FrameLayout mLinearFirstArrow=(FrameLayout)mLinearView.findViewById(R.id.linearFirst);
+			final ImageView mImageArrowFirst=(ImageView)mLinearView.findViewById(R.id.imageFirstArrow);
+			final LinearLayout mLinearScrollSecond=(LinearLayout)mLinearView.findViewById(R.id.linear_scroll);
+			
+			//checkes if menu is already opened or not
+			if(isFirstViewClick==false)
+			{
+				mLinearScrollSecond.setVisibility(View.GONE);
+				mImageArrowFirst.setBackgroundResource(R.drawable.arw_lt);
+			}
+			else
+			{
+				mLinearScrollSecond.setVisibility(View.VISIBLE);
+				mImageArrowFirst.setBackgroundResource(R.drawable.arw_down);
+			}
+			//Handles onclick effect on list item
+			mProductName.setOnTouchListener(new OnTouchListener()
+			{
+				@Override
+				public boolean onTouch(View v, MotionEvent event) 
+				{
+					System.out.println("you clicked"+v.getTag());
+					System.out.println("you clicked"+((TextView) v).getText());
+					txt.setText(v.getTag().toString());
+					if(isFirstViewClick==false)
+					{
+						isFirstViewClick=true;
+						mImageArrowFirst.setBackgroundResource(R.drawable.arw_down);
+						mLinearScrollSecond.setVisibility(View.VISIBLE);
+						
+//						txt.setText(""+mProductName.getId()+""+mProductName.getTag());
+//						mainList.get(0).getGid1()
+//						System.out.println("Gid1"+mainList.get(i).getGid1());
+					}
+					else
+					{
+						isFirstViewClick=false;
+						mImageArrowFirst.setBackgroundResource(R.drawable.arw_lt);
+						mLinearScrollSecond.setVisibility(View.GONE);	
+					}
+					return false;
+				} 
+			});
+			
+			
+			final String name = mainList.get(i).getpName();
+			mProductName.setText(name);
+			mProductName.setTag(i);
+					    
+			//Adds data into second row
+		    for (int j = 0; j < mainList.get(i).getmSubCategoryList().size(); j++) 
+		    {
+//				LayoutInflater inflater2 = null;
+//				inflater2 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//				View mLinearView2 = inflater2.inflate(R.layout.row_second, null);
+				
+				View mLinearView2=(View) ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.row_second, null);
+		    
+				final TextView mSubItemName = (TextView) mLinearView2.findViewById(R.id.textViewTitle);
+				final FrameLayout mLinearSecondArrow=(FrameLayout)mLinearView2.findViewById(R.id.linearSecond);
+				final ImageView mImageArrowSecond=(ImageView)mLinearView2.findViewById(R.id.imageSecondArrow);
+				final LinearLayout mLinearScrollThird=(LinearLayout)mLinearView2.findViewById(R.id.linear_scroll_third);
+				
+				//checkes if menu is already opened or not
+				if(isSecondViewClick==false)
+				{
+					mLinearScrollThird.setVisibility(View.GONE);
+					mImageArrowSecond.setBackgroundResource(R.drawable.arw_lt);
+				}
+				else
+				{
+					mLinearScrollThird.setVisibility(View.VISIBLE);
+					mImageArrowSecond.setBackgroundResource(R.drawable.arw_down);
+				}
+				//Handles onclick effect on list item	
+				mSubItemName.setOnTouchListener(new OnTouchListener()
+				{	
+						@Override
+						public boolean onTouch(View v, MotionEvent event) 
+						{
+							System.out.println("you clicked"+v.getTag());
+							System.out.println("you clicked"+((TextView) v).getText());
+							txt.setText(v.getTag().toString());
+							if(isSecondViewClick==false)
+							{
+								isSecondViewClick=true;
+								mImageArrowSecond.setBackgroundResource(R.drawable.arw_down);
+								mLinearScrollThird.setVisibility(View.VISIBLE);
+							}
+							else
+							{
+								isSecondViewClick=false;
+								mImageArrowSecond.setBackgroundResource(R.drawable.arw_lt);
+								mLinearScrollThird.setVisibility(View.GONE);	
+							}
+							return false;
+						} 
+					});
+				
+				
+				final String catName = mainList.get(i).getmSubCategoryList().get(j).getpSubCatName();
+				mSubItemName.setText(catName);
+				mSubItemName.setTag(i+""+j);
+				//Adds items in subcategories
+				for (int k = 0; k < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().size(); k++) 
+				{
+					LayoutInflater inflater3 = null;
+					inflater3 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+					View mLinearView3 = inflater3.inflate(R.layout.row_third, null);
+			    
+					final TextView mItemName = (TextView) mLinearView3.findViewById(R.id.textViewItemName);
+//					TextView mItemPrice = (TextView) mLinearView3.findViewById(R.id.textViewItemPrice);
+					final ImageView mImageArrowThird=(ImageView)mLinearView3.findViewById(R.id.imageThirdArrow);
+					final FrameLayout mLinearThirdArrow=(FrameLayout)mLinearView3.findViewById(R.id.linearThird);
+					final LinearLayout mLinearScrollFourth=(LinearLayout)mLinearView3.findViewById(R.id.linear_scroll_fourth);
+					if(isThirdViewClick==false)
+					{
+						mLinearScrollFourth.setVisibility(View.GONE);
+						mImageArrowThird.setBackgroundResource(R.drawable.arw_lt);
+					}
+					else
+					{
+						mLinearScrollFourth.setVisibility(View.VISIBLE);
+						mImageArrowThird.setBackgroundResource(R.drawable.arw_down);
+					}
+					mItemName.setOnTouchListener(new OnTouchListener()
+					{	
+							@Override
+							public boolean onTouch(View v, MotionEvent event) 
+							{
+								System.out.println("you clicked"+v.getTag());
+								System.out.println("you clicked"+((TextView) v).getText());
+								txt.setText(v.getTag().toString());
+								if(isThirdViewClick==false)
+								{
+									isThirdViewClick=true;
+									mImageArrowThird.setBackgroundResource(R.drawable.arw_down);
+									mLinearScrollFourth.setVisibility(View.VISIBLE);
+								
+								}
+								else
+								{
+									isThirdViewClick=false;
+									mImageArrowThird.setBackgroundResource(R.drawable.arw_lt);
+									mLinearScrollFourth.setVisibility(View.GONE);	
+								}
+								return false;
+							} 
+						});
+					
+					
+					final String itemName = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getItemName();
+//					final String itemPrice = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getItemPrice();
+					mItemName.setText(itemName);
+					mItemName.setTag(i+""+j+""+k);
+//					mItemPrice.setText(itemPrice);
+					
+					for (int p = 0; p < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().size(); p++) 
+					{
+						LayoutInflater inflater4 = null;
+						inflater4 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+						View mLinearView4 = inflater4.inflate(R.layout.row_fourth, null);
+				    
+						final TextView mItemAvail = (TextView) mLinearView4.findViewById(R.id.textAvailable);
+						final ImageView mImageArrowFourth=(ImageView)mLinearView4.findViewById(R.id.imageFourthArrow);
+						final FrameLayout mLinearFourthArrow=(FrameLayout)mLinearView4.findViewById(R.id.linearFourth);
+						final LinearLayout mLinearScrollFifth=(LinearLayout)mLinearView4.findViewById(R.id.linear_scroll_fifth);
+						
+						if(isFourthViewClick==false)
+						{
+							mLinearScrollFifth.setVisibility(View.GONE);
+							mImageArrowFourth.setBackgroundResource(R.drawable.arw_lt);
+						}
+						else
+						{
+							mLinearScrollFifth.setVisibility(View.VISIBLE);
+							mImageArrowFourth.setBackgroundResource(R.drawable.arw_down);
+						}
+						mItemAvail.setOnTouchListener(new OnTouchListener()
+						{	
+								@Override
+								public boolean onTouch(View v, MotionEvent event) 
+								{
+									System.out.println("you clicked"+v.getTag());
+									System.out.println("you clicked"+((TextView) v).getText());
+									txt.setText(v.getTag().toString());
+									if(isFourthViewClick==false)
+									{
+										isFourthViewClick=true;
+										mImageArrowFourth.setBackgroundResource(R.drawable.arw_down);
+										mLinearScrollFifth.setVisibility(View.VISIBLE);
+									
+									}
+									else
+									{
+										isFourthViewClick=false;
+										mImageArrowFourth.setBackgroundResource(R.drawable.arw_lt);
+										mLinearScrollFifth.setVisibility(View.GONE);	
+									}
+									return false;
+								} 
+							});
+						final String avail = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getAvail();
+//						final String itemPrice = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getItemPrice();
+						mItemAvail.setText(avail);
+						mItemAvail.setTag(i+""+j+""+k+""+p);
+
+						for (int q = 0; q < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().size(); q++) 
+						{
+							LayoutInflater inflater5 = null;
+							inflater5 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+							View mLinearView5 = inflater5.inflate(R.layout.row_fifth, null);
+					    
+							final TextView mLocation = (TextView) mLinearView5.findViewById(R.id.textLocation);
+							final ImageView mImageArrowFifth=(ImageView)mLinearView5.findViewById(R.id.imageFifthArrow);
+							final FrameLayout mLinearFifthArrow=(FrameLayout)mLinearView5.findViewById(R.id.linearFifth);
+							final LinearLayout mLinearScrollSixth=(LinearLayout)mLinearView5.findViewById(R.id.linear_scroll_sixth);
+							
+							if(isFifthViewClick==false)
+							{
+								mLinearScrollSixth.setVisibility(View.GONE);
+								mImageArrowFifth.setBackgroundResource(R.drawable.arw_lt);
+							}
+							else
+							{
+								mLinearScrollSixth.setVisibility(View.VISIBLE);
+								mImageArrowFifth.setBackgroundResource(R.drawable.arw_down);
+							}
+							mLocation.setOnTouchListener(new OnTouchListener()
+							{	
+									@Override
+									public boolean onTouch(View v, MotionEvent event) 
+									{
+										System.out.println("you clicked"+v.getTag());
+										System.out.println("you clicked"+((TextView) v).getText());
+										txt.setText(v.getTag().toString());
+										
+										if(isFifthViewClick==false)
+										{
+											isFifthViewClick=true;
+											mImageArrowFourth.setBackgroundResource(R.drawable.arw_down);
+											mLinearScrollSixth.setVisibility(View.VISIBLE);
+										}
+										else
+										{
+											isFifthViewClick=false;
+											mImageArrowFourth.setBackgroundResource(R.drawable.arw_lt);
+											mLinearScrollSixth.setVisibility(View.GONE);	
+										}
+										return false;
+									} 
+								});
+							final String loc = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getLocation();
+							mLocation.setText(loc);
+							mLocation.setTag(i+""+j+""+k+""+p+""+q);
+							
+							for (int r = 0; r < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().size(); r++) 
+							{
+								System.out.println("sizeeeeeeee"+mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().size());;
+								LayoutInflater inflater6 = null;
+								inflater6 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+								View mLinearView6 = inflater6.inflate(R.layout.row_sixth, null);
+						    
+								final TextView mPrice = (TextView) mLinearView6.findViewById(R.id.textPrice);
+								final ImageView mImageArrowSixth=(ImageView)mLinearView6.findViewById(R.id.imageSixthArrow);
+								final FrameLayout mLinearSixthArrow=(FrameLayout)mLinearView6.findViewById(R.id.linearSixth);
+								final LinearLayout mLinearScrollSeventh=(LinearLayout)mLinearView6.findViewById(R.id.linear_scroll_seventh);
+								
+								if(isSixthViewClick==false)
+								{
+									mLinearScrollSeventh.setVisibility(View.GONE);
+									mImageArrowSixth.setBackgroundResource(R.drawable.arw_lt);
+								}
+								else
+								{
+									mLinearScrollSeventh.setVisibility(View.VISIBLE);
+									mImageArrowSixth.setBackgroundResource(R.drawable.arw_down);
+								}
+								mPrice.setOnTouchListener(new OnTouchListener()
+								{	
+										@Override
+										public boolean onTouch(View v, MotionEvent event) 
+										{
+											System.out.println("you clicked"+v.getTag());
+											System.out.println("you clicked"+((TextView) v).getText());
+											txt.setText(v.getTag().toString());
+											
+											if(isSixthViewClick==false)
+											{
+												isSixthViewClick=true;
+												mImageArrowSixth.setBackgroundResource(R.drawable.arw_down);
+												mLinearScrollSeventh.setVisibility(View.VISIBLE);
+											}
+											else
+											{
+												isSixthViewClick=false;
+												mImageArrowSixth.setBackgroundResource(R.drawable.arw_lt);
+												mLinearScrollSeventh.setVisibility(View.GONE);	
+											}
+											return false;
+										} 
+									});
+								final String priceval = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getPrice();
+								mPrice.setText(priceval);
+								mPrice.setTag(i+""+j+""+k+""+p+""+q+""+r);
+								
+								for (int s = 0; s < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().size(); s++) 
+								{
+									LayoutInflater inflater7 = null;
+									inflater7 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+									View mLinearView7 = inflater7.inflate(R.layout.row_seventh, null);
+							    
+									final TextView mPayment = (TextView) mLinearView7.findViewById(R.id.textPayment);
+									final ImageView mImageArrowSeventh=(ImageView)mLinearView7.findViewById(R.id.imageSeventhArrow);
+									final FrameLayout mLinearSeventhArrow=(FrameLayout)mLinearView7.findViewById(R.id.linearSeventh);
+									final LinearLayout mLinearScrollEighth=(LinearLayout)mLinearView7.findViewById(R.id.linear_scroll_eighth);
+									
+									if(isSeventhViewClick==false)
+									{
+										mLinearScrollEighth.setVisibility(View.GONE);
+										mImageArrowSeventh.setBackgroundResource(R.drawable.arw_lt);
+									}
+									else
+									{
+										mLinearScrollEighth.setVisibility(View.VISIBLE);
+										mImageArrowSeventh.setBackgroundResource(R.drawable.arw_down);
+									}
+									mPayment.setOnTouchListener(new OnTouchListener()
+									{	
+											@Override
+											public boolean onTouch(View v, MotionEvent event) 
+											{
+												System.out.println("you clicked"+v.getTag());
+												System.out.println("you clicked"+((TextView) v).getText());
+												txt.setText(v.getTag().toString());
+												
+												if(isSeventhViewClick==false)
+												{
+													isSeventhViewClick=true;
+													mImageArrowSeventh.setBackgroundResource(R.drawable.arw_down);
+													mLinearScrollEighth.setVisibility(View.VISIBLE);
+												}
+												else
+												{
+													isSeventhViewClick=false;
+													mImageArrowSeventh.setBackgroundResource(R.drawable.arw_lt);
+													mLinearScrollEighth.setVisibility(View.GONE);	
+												}
+												return false;
+											} 
+										});
+									final String paymentval = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getPayment();
+									mPayment.setText(paymentval);
+									mPayment.setTag(i+""+j+""+k+""+p+""+q+""+r+""+s);
+									
+									for (int t = 0; t < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().size(); t++) 
+									{
+										LayoutInflater inflater8 = null;
+										inflater8 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+										View mLinearView8 = inflater8.inflate(R.layout.row_eighth, null);
+								    
+										final TextView mDelivery= (TextView) mLinearView8.findViewById(R.id.textDelivery);
+										final ImageView mImageArrowEighth=(ImageView)mLinearView8.findViewById(R.id.imageEighthArrow);
+										final FrameLayout mLinearEighthArrow=(FrameLayout)mLinearView8.findViewById(R.id.linearEighth);
+										final LinearLayout mLinearScrollNinth=(LinearLayout)mLinearView8.findViewById(R.id.linear_scroll_ninth);
+										
+										if(isEighthViewClick==false)
+										{
+											mLinearScrollNinth.setVisibility(View.GONE);
+											mImageArrowEighth.setBackgroundResource(R.drawable.arw_lt);
+										}
+										else
+										{
+											mLinearScrollNinth.setVisibility(View.VISIBLE);
+											mImageArrowEighth.setBackgroundResource(R.drawable.arw_down);
+										}
+										mDelivery.setOnTouchListener(new OnTouchListener()
+										{	
+												@Override
+												public boolean onTouch(View v, MotionEvent event) 
+												{
+													System.out.println("you clicked"+v.getTag());
+													System.out.println("you clicked"+((TextView) v).getText());
+													txt.setText(v.getTag().toString());
+													
+													if(isEighthViewClick==false)
+													{
+														isEighthViewClick=true;
+														mImageArrowEighth.setBackgroundResource(R.drawable.arw_down);
+														mLinearScrollNinth.setVisibility(View.VISIBLE);
+													}
+													else
+													{
+														isEighthViewClick=false;
+														mImageArrowEighth.setBackgroundResource(R.drawable.arw_lt);
+														mLinearScrollNinth.setVisibility(View.GONE);	
+													}
+													return false;
+												} 
+											});
+										final String deliveryval = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().get(t).getDelivery();
+										mDelivery.setText(deliveryval);
+										mDelivery.setTag(i+""+j+""+k+""+p+""+q+""+r+""+s+""+t);
+										
+										for (int u = 0; u < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().get(t).getmOfferList().size(); u++) 
+										{
+											LayoutInflater inflater9 = null;
+											inflater9 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+											View mLinearView9 = inflater9.inflate(R.layout.row_ninth, null);
+									    
+											final TextView mOffers= (TextView) mLinearView9.findViewById(R.id.textOffers);
+											final ImageView mImageArrowNinth=(ImageView)mLinearView9.findViewById(R.id.imageNinthArrow);
+											final FrameLayout mLinearNinthArrow=(FrameLayout)mLinearView9.findViewById(R.id.linearNinth);
+											final LinearLayout mLinearScrollTenth=(LinearLayout)mLinearView9.findViewById(R.id.linear_scroll_tenth);
+											
+											if(isNinthViewClick==false)
+											{
+												mLinearScrollTenth.setVisibility(View.GONE);
+												mImageArrowNinth.setBackgroundResource(R.drawable.arw_lt);
+											}
+											else
+											{
+												mLinearScrollTenth.setVisibility(View.VISIBLE);
+												mImageArrowNinth.setBackgroundResource(R.drawable.arw_down);
+											}
+											mOffers.setOnTouchListener(new OnTouchListener()
+											{	
+													@Override
+													public boolean onTouch(View v, MotionEvent event) 
+													{
+														System.out.println("you clicked"+v.getTag());
+														System.out.println("you clicked"+((TextView) v).getText());
+														txt.setText(v.getTag().toString());
+														
+														if(isNinthViewClick==false)
+														{
+															isNinthViewClick=true;
+															mImageArrowNinth.setBackgroundResource(R.drawable.arw_down);
+															mLinearScrollTenth.setVisibility(View.VISIBLE);
+														}
+														else
+														{
+															isNinthViewClick=false;
+															mImageArrowNinth.setBackgroundResource(R.drawable.arw_lt);
+															mLinearScrollTenth.setVisibility(View.GONE);	
+														}
+														return false;
+													} 
+												});
+											final String offerval = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().get(t).getmOfferList().get(u).getOffer();
+											mOffers.setText(offerval);
+											mOffers.setTag(i+""+j+""+k+""+p+""+q+""+r+""+s+""+t+""+u);
+											
+											for (int v = 0; v < mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().get(t).getmOfferList().get(u).getmFeedbackList().size(); v++) 
+											{
+												LayoutInflater inflater10 = null;
+												inflater10 = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+												View mLinearView10 = inflater10.inflate(R.layout.row_tenth, null);
+										    
+												final TextView mFeedback= (TextView) mLinearView10.findViewById(R.id.textFeedback);
+												mFeedback.setOnTouchListener(new OnTouchListener()
+												{	
+														@Override
+														public boolean onTouch(View v, MotionEvent event) 
+														{
+															System.out.println("you clicked"+v.getTag());
+															System.out.println("you clicked"+((TextView) v).getText());
+															txt.setText(v.getTag().toString());
+															return false;
+														} 
+													});
+												final String feedbackval = mainList.get(i).getmSubCategoryList().get(j).getmItemListArray().get(k).getmAvailableList().get(p).getmLocationList().get(q).getmPriceList().get(r).getmPaymentList().get(s).getmDeliveryList().get(t).getmOfferList().get(u).getmFeedbackList().get(v).getFeedback();
+												mFeedback.setText(feedbackval);
+												mFeedback.setTag(i+""+j+""+k+""+p+""+q+""+r+""+s+""+t+""+u+""+v);
+												
+												mLinearScrollTenth.addView(mLinearView10);
+											 }	
+											
+											mLinearScrollNinth.addView(mLinearView9);
+										 }	
+										
+										mLinearScrollEighth.addView(mLinearView8);
+									 }	
+									
+									mLinearScrollSeventh.addView(mLinearView7);
+								 }	
+								
+								mLinearScrollSixth.addView(mLinearView6);
+							 }	
+							mLinearScrollFifth.addView(mLinearView5);
+						 }	
+						
+						mLinearScrollFourth.addView(mLinearView4);
+					 }					
+					mLinearScrollThird.addView(mLinearView3);
+				 }
+				
+				mLinearScrollSecond.addView(mLinearView2);
+		    }
+		    
+		    mLinearListView.addView(mLinearView);
+		}		
+	}
+ 
+}
+activity_main.xml
+------------------<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#323232" >
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:textColor="#000000" />
+
+        <!-- Linearlaout which acts as ListView -->
+
+        <LinearLayout
+            android:id="@+id/linear_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt"
+            android:orientation="vertical" />
+    </RelativeLayout>
+
+</ScrollView>
+
+row_first.xml
+-------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000ff"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/linearFirst"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/imageFirstArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="5dp"
+            android:paddingRight="15dp"
+             />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+</LinearLayout>
+row_second.xml
+--------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff0000"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/linearSecond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageSecondArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="5dp"
+            android:paddingRight="15dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_scroll_third"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+</LinearLayout>

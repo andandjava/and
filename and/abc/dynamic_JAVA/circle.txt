@@ -1,0 +1,46 @@
+Circle
+======
+making an image(or anything we want) can make into the shape of circle.
+It can be done dynamically.
+Through xml we can do only when the image is present in the resources folder i.e. static. 
+If we retrieve image dynamically we can do it only by java code.
+
+Converting a image into circular shape
+---------------------------------------
+activity_main.xml
+=================
+MainActivity.java
+=================
+
+ImageView image1 = (ImageView) findViewById(R.id.imageView10);
+         Bitmap bm1 = BitmapFactory.decodeResource(getResources(),R.drawable.download);
+         Bitmap bmp1 = RoundShape.getRoundedShape(bm1);
+         image1.setImageBitmap(bmp1);
+
+RoundShape.java
+===============
+package com.example.designapp5;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
+
+public class RoundShape {
+
+	public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
+		int targetWidth = 50;
+		int targetHeight = 50;
+		Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetHeight,Bitmap.Config.ARGB_8888);
+
+		Canvas canvas = new Canvas(targetBitmap);
+		Path path = new Path();
+		path.addCircle(((float) targetWidth - 1) / 2,((float) targetHeight - 1) / 2,(Math.min(((float) targetWidth), ((float) targetHeight)) / 2),Path.Direction.CCW);
+
+		canvas.clipPath(path);
+		Bitmap sourceBitmap = scaleBitmapImage;
+		canvas.drawBitmap(sourceBitmap, new Rect(0, 0, sourceBitmap.getWidth(),sourceBitmap.getHeight()), new Rect(0, 0, targetWidth,targetHeight), null);
+		return targetBitmap;
+	}
+
+}

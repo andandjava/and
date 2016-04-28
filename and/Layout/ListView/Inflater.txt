@@ -1,0 +1,76 @@
+inflation: converting XML appearance definition into java view objects in code is called inflattion
+
+very time consuming
+take a xml view,create its java object,set values for all attributes, and recursively repeat for all its child nodes
+use the getSystemService() or getLayoutInflater() to create an object of LayoutInflater
+
+only precompiled xml files by the aapt can be inflated during runtime for performance
+
+How does it work
+----------------
+LayoutInflater I=getLayoutInflater();
+View v=I.inflate(int resource,ViewGroup parent)
+
+resource=name of xml layout file that you want to inflate
+parent=a layout that you would use as a parent for v in the viewHierarchy
+
+parent is optional
+
+I.inflate(R.layout.sublayout,null) is valid   -->sublayout.xml in res folder
+
+what is v? the root view representing resource(sublayout.xml-->textview).
+
+
+
+View v=I.inflate(R.layout.sublayout,null)
+what v contains--textview
+Parent of v--null
+Layout params--null
+
+u r not added to layout
+Adding v to the frame(or linear layout)
+FrameLayout f=(FrameLayout)findViewById(R.id.myframe);
+f.addView(v);
+
+activity_main.xml
+
+  FrameLayout
+    LinearLayout
+      Textview
+
+sublayout.xml
+ textview
+
+addint v to the LinearLayout
+
+View v-I.inflate(R.layout.sublayout,null)
+Linearlayout l=(LinearLayout)findViewById(R.id.mylinear)
+l.addView(v);
+
+2)on calling inflate method with parent
+
+View v=I.inflate(R.layout.sublayout,linear)
+parent as your linearlayout
+
+what v contains--linearlayout
+parent of v-framelayout
+layoutparams--framelayout
+
+automatically added to the linearlayout,so dont call addView.
+it is the same as saying
+I.inflate(R.layout.sublayout,linear,true)
+
+true--attach to root which means R.layout.sublayout should be inflated and made a part of the parent linear.
+
+false--attach to root which means R.layout.sublayout should be inflated and not made a part of the linear but it should use the LayoutParams specified by Linear.
+
+
+I.inflate(R.layout.sublayout,linear)
+I.inflate(R.layout.sublayout,linear,true)  
+both contain a reference to linearlayout in v
+we want a reference to the textview so that we can directly manipulate it.
+I.inflate(R.layout.sublayout,linear,false) textview  null  LinearLayout
+  view directly no need linearlayout
+what v contains textview
+parent of v null
+Layout params  LinearLayout

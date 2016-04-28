@@ -1,0 +1,89 @@
+PopUp Menu
+===========
+res/menu/popup_menu.xml
+=======================
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Single menu item 
+         Set id, icon and Title for each menu item
+    -->
+    <item  
+        android:id="@+id/one"  
+        android:title="One"/>  
+      
+    <item  
+        android:id="@+id/two"  
+        android:title="Two"/>  
+        
+    <item  
+        android:id="@+id/three"  
+        android:title="Three"/>  
+</menu>
+
+activity_main.xml
+=================
+(Take a button)
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"   
+    tools:context=".MainActivity" >  
+  
+  
+    <Button  
+        android:id="@+id/button1"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignParentLeft="true"  
+        android:layout_alignParentTop="true"  
+        android:layout_marginLeft="62dp"  
+        android:layout_marginTop="50dp"  
+        android:text="Show Popup" /> 
+  
+</RelativeLayout> 
+MainActivity.java
+=================
+package com.example.test;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+@SuppressLint("NewApi")
+public class MainActivity extends Activity {  
+Button button1;  
+           
+         @Override  
+         protected void onCreate(Bundle savedInstanceState) {  
+          super.onCreate(savedInstanceState);  
+          setContentView(R.layout.activity_main);  
+            
+          button1 = (Button) findViewById(R.id.button1);  
+          button1.setOnClickListener(new OnClickListener() {  
+           
+           @Override  
+           public void onClick(View v) {  
+
+            //Creating the instance of PopupMenu  
+            PopupMenu popup = new PopupMenu(MainActivity.this, button1);  
+            //Inflating the Popup using xml file  
+            popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());  
+           
+            //registering popup with OnMenuItemClickListener  
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
+             public boolean onMenuItemClick(MenuItem item) {  
+              Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();  
+              return true;  
+             }  
+            });  
+  
+            popup.show();//showing popup menu  
+           }  
+          });//closing the setOnClickListener method  
+         }  
+    }  

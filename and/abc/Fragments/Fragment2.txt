@@ -1,0 +1,71 @@
+using java
+==========
+
+Fragment Manager
+----------------
+Every activity has its own Fragment manager accessible through getFragmentManager()
+it maintains reference to all fragments inside the activity.
+
+use findFragmentById() or findFragmentByTag(0 to get reference to a particular fragment.
+
+Fragment Transactions
+---------------------
+changes to the UI terms of adding,removing and replacing fragments are conducted as FragmentTransactions.
+
+fragmentmanager--begins--transactions(add..)--commits(all/none)--then we can see the changes.(i.e. f visible)
+
+process
+======
+create a class that extends Fragment
+create a separate file or java objects that contain the appearance
+use the onCreateView method to link its appearance
+Get a reference to Fragment Manager
+Begin a transaction by calling beginTransaction()
+
+code
+-----
+MyFragmement frag=new MyFragment();
+FragmentManager manager=getFragmentManager();
+fragmentTransaction transaction=manager.beginTransaction();//givers reference
+transaction.add(R.id.layout,frag,"name");
+transaction.commit();
+
+1.layout in which u want to add
+2.frag--obj of the fragment itselt which to be intialised
+3.string--later find fragment by tag
+
+
+coding: we have to change code only in java code(MainActivity)
+======
+MainActivity.java
+=================
+package com.example.myfragment2;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.widget.RelativeLayout;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		//RelativeLayout mylayout=(RelativeLayout)findViewById(R.id.homelayout);
+		
+		FragmentOne frag1=new FragmentOne();
+		FragmentTwo frag2=new FragmentTwo();
+		FragmentManager manager=getFragmentManager();
+		FragmentTransaction transaction=manager.beginTransaction();
+	//	transaction.add(R.id.homelayout, frag1,"fff");
+		transaction.add(R.id.homelayout, frag2,"ggg");
+		transaction.commit();
+
+	}
+}
+
+
+

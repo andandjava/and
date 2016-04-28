@@ -1,0 +1,19 @@
+ParseInstallation Class	
+Represents this app installed on this device. Use this class to track infomation you want to sample from (i.e. if you update a field on app launch, you can issue a query to see the number of devices which were active in the last N hours).
+Constructs a new ParseInstallation. Generally, you should not need to construct ParseInstallations yourself. Instead use CurrentInstallation.
+
+The ParseObject is a local representation of data that can be saved and retrieved from the Parse cloud.
+
+ParseRole Class	Parse
+Represents a Role on the Parse server. ParseRoles represent groupings of ParseUsers for the purposes of granting permissions (e.g. specifying a ParseACL for a ParseObject. Roles are specified by their sets of child users and child roles, all of which are granted any permissions that the parent role has. Roles must have a name (that cannot be changed after creation of the role), and must specify an ACL.
+
+ParseSession Class	
+Represents a session of a user for a Parse application.
+
+ParseACL Class	Parse
+A ParseACL is used to control which users and roles can access or modify a particular object. Each ParseObject can have its own ParseACL. You can grant read and write permissions separately to specific users, to groups of users that belong to roles, or you can grant permissions to "the public" so that, for example, any user could read a particular object but only a particular set of users could write to that object.
+
+ParseUser Class	Represents a user for a Parse application.
+
+
+The ParseQuery class defines a query that is used to fetch ParseObjects. The most common use case is finding all objects that match a query through the FindAsync() method.

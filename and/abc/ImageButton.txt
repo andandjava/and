@@ -1,0 +1,31 @@
+ImageButton
+===========
+Displays a button with an image (instead of text) that can be pressed or clicked by the user
+
+MainActivity.java
+=================
+
+public class MainActivity extends Activity {
+	
+	ImageButton imgButton;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_main);
+
+          addListenerOnButton();
+        }
+
+	private void addListenerOnButton() {
+		
+          imgButton = (ImageButton) findViewById(R.id.imageButton1);
+
+          imgButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              Toast.makeText(MainActivity.this,"ImageButton Clicked : tutorialspoint.com", Toast.LENGTH_SHORT).show();
+            }
+          });		
+	}
+}

@@ -1,0 +1,7 @@
+explicit intent
+
+implicit intent
+
+sticky intent
+
+pending intent

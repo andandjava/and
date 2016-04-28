@@ -1,0 +1,48 @@
+WebView
+========
+1)webview.loadUrl("http://developer.android.com/");
+2)webview.loadUrl("file:///android-asset/aaa.html");
+3)webview.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
+
+Ex:
+webview.loadDataWithBaseURL("file:///android-asset/","<html><body>Hello Android</body></html>","text/html","UTF-8", null);
+if baseUrl is empty("") then it will wont print images
+webview.loadDataWithBaseURL("","<html><body>Hello Android</body></html>","text/html","UTF-8", null);
+
+Program
+---------
+package com.webviewexample.activity;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.webkit.WebView;
+
+public class WebviewExampleActivity extends Activity {
+	ProgressDialog pdialog;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		WebView webview = new WebView(this);
+		setContentView(webview);
+
+		
+		//we can load Data in different ways 
+		
+		//Loading the url
+		//webview.loadUrl("http://developer.android.com/");
+		
+		//loading The Html file from assets
+		//webview.loadUrl("file:///android_asset/aaa.html");
+		
+		//loading the Html content.
+	//	webview.loadData("<html><body><h1>hiiii</h1></body></html>","text/html","UTF-8");
+		
+		webview.loadDataWithBaseURL("file:///android_asset/","<html><body>Hello Android</body></html>","text/html","UTF-8", null);
+		//webview.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
+		
+		
+	}
+}

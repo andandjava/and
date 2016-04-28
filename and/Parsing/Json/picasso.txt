@@ -1,0 +1,4 @@
+if(temp.b_imag.contains("http:")){
+	Picasso.with(BabiesList.this).load(temp.b_imag)
+	.into(img);
+	}

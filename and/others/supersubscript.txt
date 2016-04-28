@@ -1,0 +1,12 @@
+superscript/subscript
+=====================
+
+x square
+
+TextView txt = (TextView) findViewById(R.id.text2);
+txt.setText(Html.fromHtml("10<sup>x</sup>"));
+txt.setText(Html.fromHtml("10<sub>x</sub>"));
+
+
+txt.setText(Html.fromHtml("Send  <.bold>SOS<./bold> Msg"));
+Html.fromHtml("Send  <b>SOS</b> Msg")

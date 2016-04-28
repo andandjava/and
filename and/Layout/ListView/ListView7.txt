@@ -1,0 +1,100 @@
+ListView 7
+==========
+extending ArrayAdapter (instead of BaseAdapter)
+
+activity_main.xml
+==================
+place  a listview
+row_list.xml
+==============
+package com.example.testing;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnItemClickListener {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		String data[] = { "India", "Pakistan" };
+		Integer[] image = { R.drawable.image1, R.drawable.image2 };
+		String address[] = { "address1", "address2" };
+
+		ListView lv = (ListView) findViewById(R.id.listview1);
+
+		// ArrayAdapter adapter=new
+		// ArrayAdapter(this,R.layout.row_layout,R.id.textView1,data);
+
+		ArrayAdapter adapter = new CustomList(this, data, image, address);
+		lv.setAdapter(adapter);
+
+		lv.setOnItemClickListener(this);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+
+		Toast.makeText(this, "position is " + position, 1).show();
+	}
+}
+
+CustomList.java
+================
+package com.example.testing;
+
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class CustomList extends ArrayAdapter<String> {
+
+	private final Activity context;
+	private final String[] data;
+	private final Integer[] image;
+	private final String[] address;
+	
+	public CustomList(Activity context,String[] data,Integer[] image,String[] address)
+	{
+		super(context, R.layout.row_layout, data);
+		
+		this.context=context;
+		this.data=data;
+		this.image=image;
+		this.address=address;
+		
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		
+		LayoutInflater inflater=context.getLayoutInflater();
+		View rowView=inflater.inflate(R.layout.row_layout, null, true);
+		
+		TextView txt=(TextView)rowView.findViewById(R.id.textView1);
+		ImageView img=(ImageView)rowView.findViewById(R.id.imageView1);
+		TextView txt2=(TextView)rowView.findViewById(R.id.textView2);
+		
+		txt.setText(data[position]);
+		img.setImageResource(image[position]);
+		txt2.setText(address[position]);
+		
+		return rowView;
+	}
+
+
+	
+}

@@ -1,0 +1,69 @@
+Calendar View
+==============
+This class is a calendar widget for displaying and selecting dates. The range of dates supported by this calendar is configurable. A user can select a date by taping on it and can scroll and fling the calendar to a desired date.
+
+activity_main.xml
+=================
+simple drag and drop
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Static CalendarView" />
+ 
+    <CalendarView
+        android:id="@+id/calendarView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="60dp" />
+    
+ 
+</RelativeLayout>
+
+MainActivity.java
+=================
+package com.example.test;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	CalendarView cal;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		cal = (CalendarView) findViewById(R.id.calendarView1);
+
+		cal.setOnDateChangeListener(new OnDateChangeListener() {
+
+			@Override
+			public void onSelectedDayChange(CalendarView view, int year,
+					int month, int dayOfMonth) {
+				// TODO Auto-generated method stub
+
+				Toast.makeText(getBaseContext(),"Selected Date is\n\n" + dayOfMonth + " : " + month+ " : " + year, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+}

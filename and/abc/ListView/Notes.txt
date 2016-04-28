@@ -1,0 +1,18 @@
+
+android.R.layout.simple_list_item1
+
+arguements of onItemClick() method
+----------------------------------
+public void onItemClick(Adapterview<?> ,View ,int ,long )
+arg0--The adapter view where the click happened
+arg1--the view within the adapterview that was clicked
+      (this will be a view provided by the adapter)
+arg2--the position of the view in the adapter
+arg3--the rowid of the item that was clicked.
+
+OnListItemClick is for ListView itself... OnItemClickListener is for any adapter view
+
+onListItemclick(Listview)
+{}
+onItemclick(Adapterview)
+{}

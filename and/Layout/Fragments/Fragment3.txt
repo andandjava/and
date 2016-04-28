@@ -1,0 +1,57 @@
+Add
+=======
+create the fragment object
+begin the FragmentTransaction
+Add the fragment
+commit the transaction
+
+all the lifecycle methods execute inside the fragment
+add(id of the layout the fragment object , a string tag to get a reference to the fragment later)
+
+Remove
+======
+
+Get the Fragment object using ID or TAG
+begin the FragmentTransaction
+remove the fragment
+commit the transaction
+
+all the lifecycle methods execute inside the fragment
+remove(the fragment object that you retrieved)
+can not use the fragment object after removing it
+
+Replace
+=======
+removes 1 fragment and adds another
+calls destructive lifecycle methods on 1st and constructive ones on 2nd fragment
+create the new fragment object
+specify the layout id where the old fragment is contained and call replace.
+
+<LinearLayout
+width
+heigth
+id="@+id/group
+<fragment class"" id="@+id/myfrag">
+</>
+
+
+create the fragment object
+begin the FragmentTransaction
+Replace the fragment
+commit the transaction
+
+
+transaction.replace(R.id.group,newFrag);
+
+Attach and detach a fragment
+=============================
+Normal creation process: create the fragment obj,associate with activity+create the UI
+onAttach is called in the Fragment to notify fragment has been attached to Activity.
+transaction.attach():create the UI
+onAttach is not called since Fragment is already associated with Activity.	
+
+Normal destruction process: destroy the UI,remove association with activity,destroy fragment object.
+onDeatach is called in the Fragment to notify fragment has been disassociated with Activity
+transaciton.detach(): destroy the UI 
+onDetach() is not called since we are only destroying the UI.
+(attach--show,detach--hide...not completely destroy)

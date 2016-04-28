@@ -1,0 +1,30 @@
+Google IO 2015
+---------------
+http://googledevelopers.blogspot.in/2015/05/google-io-2015-develop-engage-earn.html
+
+http://www.droid-life.com/tag/android-m/
+
+
+https://android-arsenal.com/details/1/18
+
+https://github.com/Trinea/android-open-project/tree/master/English%20Version
+
+https://github.com/nhaarman/ListViewAnimations
+
+http://snowdream.github.io/awesome-android/
+
+http://developer.xamarin.com/guides/android/platform_features/maps_and_location/maps/obtaining_a_google_maps_api_key/
+
+actionbars
+----------
+http://nerds.airbnb.com/host-experience-android/
+
+http://ocddevelopers.com/2014/using-a-translucent-action-bar-with-google-maps/
+
+QuickContackBadge
+-----------------
+http://custom-android-dn.blogspot.in/2012/12/how-to-use-quickcontactbadge-in-android.html
+
+actionbar style generator
+--------------------------
+http://jgilfelt.github.io/android-actionbarstylegenerator/#name=example&compat=sherlock&theme=light&actionbarstyle=solid&texture=0&hairline=0&neutralPressed=1&backColor=E4E4E4%2C100&secondaryColor=D6D6D6%2C100&tabColor=33B5E5%2C100&tertiaryColor=F2F2F2%2C100&accentColor=33B5E5%2C100&cabBackColor=FFFFFF%2C100&cabHighlightColor=33B5E5%2C100

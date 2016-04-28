@@ -1,0 +1,1 @@
+<http | https>://<servername>:<port>/<context-root>/<resource-identifier>

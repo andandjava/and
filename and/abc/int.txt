@@ -1,0 +1,15 @@
+what is 9patch image
+how can we register broadcast receiver
+xml parsing
+what is SOAP
+AIDL
+what datatypes support in AIDL
+what is content providers
+pending intent
+updating 10 queries in single line(DBHelper is only in training classes.real time SQLDatabase..rawQuery)
+what is context
+fragments
+diff b/w static and dynamic layout?which is better?
+ANR
+thirdpartylibraries
+creating table layout dynamically

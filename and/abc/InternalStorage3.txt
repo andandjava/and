@@ -1,0 +1,179 @@
+we can store image in the internal storage in the form of bytearray[image->bitmap->bytearray]
+we can send image from one activity to another activity in the form of bitmap
+
+Internal Storage
+=================
+stores an image from drawable folder and retrieving into imageView2
+activity_main.xml
+================
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText1"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignParentLeft="true"
+        android:text="File Name:" />
+    
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="24dp"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+    
+    
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/button1"
+        
+        android:layout_marginRight="18dp" 
+        android:src="@drawable/ic_launcher"/>
+    
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/editText1"
+            android:layout_alignBottom="@+id/imageView1"
+            android:layout_alignLeft="@+id/button2" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView1"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="16dp"
+        android:text="save" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_marginRight="19dp"
+        android:text="read" />
+    
+        <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_below="@id/button1"
+        android:text="summary"/>
+
+    
+
+</RelativeLayout>
+MainActivity.java
+=================
+package com.example.internalimage2;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+	EditText editTextFileName;
+	Button saveButton, readButton;
+	ImageView image1,image2;
+	TextView value;
+	Bitmap bm;
+	ByteArrayOutputStream bos;
+	byte[] bitmapdata;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		editTextFileName = (EditText) findViewById(R.id.editText1);
+		saveButton = (Button) findViewById(R.id.button1);
+		readButton = (Button) findViewById(R.id.button2);
+		image1 = (ImageView) findViewById(R.id.imageView1);
+		image2 = (ImageView) findViewById(R.id.imageView2);
+		value = (TextView) findViewById(R.id.textView);
+
+		//bm = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+		bm=BitmapFactory.decodeResource(getResources(),R.drawable.image1);
+		bos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.JPEG, 40, bos);
+		// Performing Action on Read Button
+		saveButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				String filename = editTextFileName.getText().toString();
+				FileOutputStream fos;
+				try {
+					fos = openFileOutput(filename, Context.MODE_APPEND);
+					bitmapdata = bos.toByteArray();
+					Log.w("Image Conversion", String.valueOf(bitmapdata.length));
+					String converted_txt = "";
+					// writing data into the file in internal storage.
+					for (int i = 0; i < bitmapdata.length; i++) {
+						//Log.w("Image Conversion", String.valueOf(bitmapdata[i]));
+						fos.write(bitmapdata[i]);
+						//converted_txt = converted_txt + bitmapdata[i];
+					}
+					//value.append(converted_txt);
+					//image1.setVisibility(View.INVISIBLE);
+					// default mode is PRIVATE, can be APPEND etc.
+					Toast.makeText(getApplicationContext(),filename + " saved", Toast.LENGTH_LONG).show();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		readButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+
+				String filename = editTextFileName.getText().toString();
+				FileInputStream fis;
+				try {
+					image2.setVisibility(View.VISIBLE);
+					value.setVisibility(View.VISIBLE);
+					// decode a immutable bitmap from specified byteArray.
+					Bitmap bmp = BitmapFactory.decodeStream(openFileInput(filename));
+					image2.setImageBitmap(bmp);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+}

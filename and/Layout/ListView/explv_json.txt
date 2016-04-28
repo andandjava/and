@@ -1,0 +1,281 @@
+Expandable ListView
+-------------------
+using json parsing upto 4 levels
+
+MainActivity.java
+=================
+package com.example.dynarraylist;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	private ArrayList<String> mainList;
+	private LinearLayout mLinearListView;
+	boolean isFirstViewClick = false;
+	boolean isSecondViewClick = false;
+	boolean isThirdViewClick = false;
+	boolean isFourthViewClick = false;
+
+//	String strJson = "{  \"services\" : [{ \"mobiles\":{\"motorolla\":[{ \"motoE\": \"1000\", \"motoG\":\"1000\", \"motoX\":\"1000\" }]}}]}";
+//	String strJson="{  \"services\" : [{ \"mobiles\":{\"motorolla\":[{ \"motoE\": \"1000\", \"motoG\":\"2000\", \"motoX\":\"3000\" }]}},{ \"mobiles2\":{\"motorolla2\":[{ \"motoE2\": \"4000\", \"motoG2\":\"5000\", \"motoX2\":\"6000\" }]}}]}";
+	String strJson="{  \"services\" : [{ \"mobiles\":{\"motorolla\":[{ \"motoE\": {\"1000\":\"available\"}, \"motoG\":{\"2000\":\"available\"}, \"motoX\":{\"3000\":\"available\"} }]}},{ \"mobiles2\":{\"motorolla2\":[{ \"motoE2\": {\"4000\":\"available\"}, \"motoG2\":{\"5000\":\"available\"}, \"motoX2\":{\"6000\":\"available\"} }]}}]}";
+	
+	
+//	String strJson = "{  \"services\" : [{ \"mobiles\":{\"motorolla\":\"1000\" } } ] }";
+//	String strJson = "{  \"services\" : [{ \"mobiles\": \"motorolla\" },{ \"cars\": \"Audi\" } ] }";
+	ArrayList<String> gid1;
+	public String gid2, gid3, gid4, gid5, gid6, gid7, gid8, gid9, gid10;
+	TextView txt;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		txt = (TextView) findViewById(R.id.txt);
+		mLinearListView = (LinearLayout) findViewById(R.id.linear_ListView);
+
+		mainList = new ArrayList<String>();
+		ArrayList<String> subcat = new ArrayList<String>();
+		try {
+			JSONObject jsonobject;
+			jsonobject = new JSONObject(strJson);
+			JSONArray mainArray = jsonobject.getJSONArray("services");
+			System.out.println("mainArray size"+mainArray.length());
+			
+			// Adds data into first row
+			for (int i = 0; i < mainArray.length(); i++) {
+
+				View mLinearView = (View) ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.row_first, null);
+				final TextView mProductName = (TextView) mLinearView.findViewById(R.id.textViewName);
+				final ImageView mImageArrowFirst = (ImageView) mLinearView.findViewById(R.id.imageFirstArrow);
+				final LinearLayout mLinearScrollSecond = (LinearLayout) mLinearView.findViewById(R.id.linear_scroll);
+				mLinearScrollSecond.setVisibility(View.GONE);
+				mImageArrowFirst.setBackgroundResource(R.drawable.arw_lt);
+
+				mProductName.setOnTouchListener(new OnTouchListener() {
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						System.out.println("you clicked" + v.getTag());
+						System.out.println("you clicked"+ ((TextView) v).getText());
+						txt.setText(v.getTag().toString());
+						if (isFirstViewClick == false) {
+							isFirstViewClick = true;
+							mImageArrowFirst.setBackgroundResource(R.drawable.arw_down);
+							mLinearScrollSecond.setVisibility(View.VISIBLE);
+						} else {
+							isFirstViewClick = false;
+							mImageArrowFirst.setBackgroundResource(R.drawable.arw_lt);
+							mLinearScrollSecond.setVisibility(View.GONE);
+						}
+						return false;
+					}
+				});
+//				String nam=mainArray.optString(i).split(":")[0];
+				
+				JSONObject firstobj=mainArray.getJSONObject(i);
+				System.out.println("looopsssi"+i);
+			
+				System.out.println("firstobj size"+firstobj.length());
+				
+				
+				JSONArray names = firstobj.names();
+				String mm="";
+				for (int s = 0; s < names.length(); s++) {
+					 mm = names.getString(s);
+					System.out.println("names list"+mm);
+				}
+//				final String name = mainArray.getString(i);
+//				String nm=names.getString(i);
+//				String nm=mainArray.getJSONObject(i).getString(name)???
+//				JSONObject secondobj=names.getJSONObject(i);
+				mProductName.setText(mm);
+				mProductName.setTag(i);
+				
+				JSONObject secondobj=firstobj.getJSONObject(mm);
+//				secondobj.names();
+			
+				for (int j = 0; j < secondobj.length(); j++) {
+					View mLinearView2=(View) ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.row_second, null);
+					
+					final TextView mSubItemName = (TextView) mLinearView2.findViewById(R.id.textViewTitle);
+					final ImageView mImageArrowSecond = (ImageView) mLinearView2.findViewById(R.id.imageSecondArrow);
+					final LinearLayout mLinearScrollThird = (LinearLayout) mLinearView2.findViewById(R.id.linear_scroll_third);
+					mLinearScrollThird.setVisibility(View.GONE);
+					mImageArrowSecond.setBackgroundResource(R.drawable.arw_lt);
+					
+					// Handles onclick effect on list item
+					mSubItemName.setOnTouchListener(new OnTouchListener() {
+						@Override
+						public boolean onTouch(View v, MotionEvent event) {
+							System.out.println("you clicked" + v.getTag());
+							System.out.println("you clicked"+ ((TextView) v).getText());
+							txt.setText(v.getTag().toString());
+							if (isSecondViewClick == false) {
+								isSecondViewClick = true;
+								mImageArrowSecond.setBackgroundResource(R.drawable.arw_down);
+								mLinearScrollThird.setVisibility(View.VISIBLE);
+							} else {
+								isSecondViewClick = false;
+								mImageArrowSecond.setBackgroundResource(R.drawable.arw_lt);
+								mLinearScrollThird.setVisibility(View.GONE);
+							}
+							return false;
+						}
+					});
+
+					JSONArray names2 = secondobj.names();
+					for (int s = 0; s < names2.length(); s++) {
+						String m = names2.getString(s);
+						System.out.println("names2 list"+m);
+					}
+//					final String catName = mainArray.optString(i).split(":")[1];
+					
+//					Iterator it=firstobj.keys();
+					String catName=names2.getString(j);
+					mSubItemName.setText(catName);
+					mSubItemName.setTag(i + "" + j);
+					// Adds items in subcategories
+//					JSONObject thirdobj=secondobj.getJSONObject(catName);
+//					JSONArray names3=thirdobj.names();
+//					
+//					for(int f=0;f<names3.length();f++)
+//					{
+//						String n3=names3.getString(f);
+//						System.out.println("names3:"+n3);
+//					}
+					JSONArray thirdarray=secondobj.getJSONArray(catName);
+					JSONObject thirdobj=thirdarray.getJSONObject(j);
+					System.out.println("siZe of third obje"+thirdobj.length());
+					
+					
+					for (int k = 0; k < thirdobj.length();k++) {
+						View mLinearView3=(View) ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.row_third, null);
+
+						final TextView mItemName = (TextView) mLinearView3.findViewById(R.id.textViewItemName);
+						final ImageView mImageArrowThird = (ImageView) mLinearView3.findViewById(R.id.imageThirdArrow);
+						final LinearLayout mLinearScrollFourth = (LinearLayout) mLinearView3.findViewById(R.id.linear_scroll_fourth);
+						mLinearScrollFourth.setVisibility(View.GONE);
+						mImageArrowThird.setBackgroundResource(R.drawable.arw_lt);
+						
+						mItemName.setOnTouchListener(new OnTouchListener() {
+							@Override
+							public boolean onTouch(View v, MotionEvent event) {
+								System.out.println("you clicked" + v.getTag());
+								System.out.println("you clicked"+ ((TextView) v).getText());
+								txt.setText(v.getTag().toString());
+								if (isThirdViewClick == false) {
+									isThirdViewClick = true;
+									mImageArrowThird.setBackgroundResource(R.drawable.arw_down);
+									mLinearScrollFourth.setVisibility(View.VISIBLE);
+
+								} else {
+									isThirdViewClick = false;
+									mImageArrowThird.setBackgroundResource(R.drawable.arw_lt);
+									mLinearScrollFourth.setVisibility(View.GONE);
+								}
+								return false;
+							}
+						});
+
+						JSONArray names3=thirdobj.names();
+						for(int ss=0;ss<names3.length();ss++)
+						{
+							String ij=names3.getString(ss);
+							System.out.println("names3"+ij);
+							String ijs=thirdobj.getString(ij);
+							System.out.println("names3 values"+ijs);
+						
+						}
+						String itemName=names3.getString(k);
+//						String itemName1=thirdobj.getString(itemName);
+						System.out.println("name3:"+itemName);
+//						System.out.println("names3 value:"+itemName1);
+						mItemName.setText(itemName);
+//						mItemName.append("--"+itemName1);
+						mItemName.setTag(i + "" + j + "" + k);
+						JSONObject fourthobj=thirdobj.getJSONObject(itemName);
+						System.out.println("size of fourth obj"+fourthobj.length());
+						System.out.println("fourth obj"+fourthobj);
+						for (int p = 0; p < fourthobj.length(); p++) 
+						{
+							View mLinearView4=(View) ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.row_fourth, null);
+					    
+							final TextView mItemAvail = (TextView) mLinearView4.findViewById(R.id.textAvailable);
+							final ImageView mImageArrowFourth=(ImageView)mLinearView4.findViewById(R.id.imageFourthArrow);
+							final FrameLayout mLinearFourthArrow=(FrameLayout)mLinearView4.findViewById(R.id.linearFourth);
+							final LinearLayout mLinearScrollFifth=(LinearLayout)mLinearView4.findViewById(R.id.linear_scroll_fifth);
+							mLinearScrollFifth.setVisibility(View.GONE);
+							mImageArrowFourth.setBackgroundResource(R.drawable.arw_lt);
+							
+							mItemAvail.setOnTouchListener(new OnTouchListener()
+							{	
+									@Override
+									public boolean onTouch(View v, MotionEvent event) 
+									{
+										System.out.println("you clicked"+v.getTag());
+										System.out.println("you clicked"+((TextView) v).getText());
+										txt.setText(v.getTag().toString());
+										if(isFourthViewClick==false)
+										{
+											isFourthViewClick=true;
+											mImageArrowFourth.setBackgroundResource(R.drawable.arw_down);
+											mLinearScrollFifth.setVisibility(View.VISIBLE);
+										
+										}
+										else
+										{
+											isFourthViewClick=false;
+											mImageArrowFourth.setBackgroundResource(R.drawable.arw_lt);
+											mLinearScrollFifth.setVisibility(View.GONE);	
+										}
+										return false;
+									} 
+								});
+							JSONArray ary=fourthobj.names();
+							String ppp="";
+							for(int pp=0;pp<ary.length();pp++)
+							{
+								 ppp=ary.getString(pp);
+								System.out.println("fourth obj names"+ppp);
+							}
+							final String avail =ary.getString(p);
+							System.out.println("avail:"+avail);
+							
+							mItemAvail.setText(avail);
+							mItemAvail.append("--"+fourthobj.getString(avail));
+							mItemAvail.setTag(i+""+j+""+k+""+p);
+							
+							
+							mLinearScrollFourth.addView(mLinearView4);
+						}
+						
+						mLinearScrollThird.addView(mLinearView3);
+					}
+					mLinearScrollSecond.addView(mLinearView2);
+				}
+				mLinearListView.addView(mLinearView);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

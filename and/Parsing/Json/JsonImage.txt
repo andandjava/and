@@ -1,0 +1,350 @@
+Images getting from webservices.we get those in the string format and those are converting them into image using Picasso
+
+we have to place the picasso jar file in the assets folder.
+
+
+EX:WebJsonImages
+================
+MainActivity.java
+------------------
+package com.example.webjsonimage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.squareup.picasso.Picasso;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	private static final String URL = "http://wptrafficanalyzer.in/p/demo1/first.php/countries/";
+	
+	private static final String COUNTRIES="countries";
+	private static final String COUNTRYNAME="countryname";
+	private static final String LANGUAGE="language";
+	private static final String CAPITAL="capital";
+	private static final String CURRENCY="currency";
+	private static final String CODE="code";
+	private static final String CURRENCYNAME="currencyname";
+	private static final String FLAG="flag";
+
+	private ArrayList<HashMap<String,String>> arraylist=new ArrayList<HashMap<String,String>>();
+	
+	ListView lv;
+	TextView tv;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		tv=(TextView)findViewById(R.id.textView1);
+		lv = (ListView) findViewById(R.id.listImage);
+		
+		new DownloadTask().execute();
+
+	}
+
+	private class DownloadTask extends AsyncTask<String, Void, String> {
+		ProgressDialog dialog;
+		JSONObject jsonObj,jobj;
+		JSONArray jsonArray;
+		
+		
+		String json;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			dialog = new ProgressDialog(MainActivity.this);
+			dialog.setTitle("JSon Parsing");
+			dialog.setMessage("downloading....");
+			dialog.setIndeterminate(false);
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			try {
+
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(URL);
+				HttpGet httpget=new HttpGet(URL);
+				HttpResponse httpresponse=httpclient.execute(httpget);
+				HttpEntity entity=httpresponse.getEntity();
+				json=EntityUtils.toString(entity);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return json;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+
+			dialog.dismiss();
+			
+//			tv.setText(json);
+			
+			try {
+				jobj=new JSONObject(json);
+				jsonArray=jobj.optJSONArray(COUNTRIES);
+				for(int i=0;i<jsonArray.length();i++)
+				{
+					jsonObj=jsonArray.optJSONObject(i);
+					HashMap<String,String> hm=new HashMap<String,String>();
+					
+					hm.put(COUNTRYNAME,jsonObj.optString(COUNTRYNAME));
+					hm.put(LANGUAGE,jsonObj.optString(LANGUAGE));
+					hm.put(CAPITAL,jsonObj.optString(CAPITAL));
+					
+					JSONObject ob=jsonObj.getJSONObject(CURRENCY);
+					hm.put(CODE,ob.optString(CODE));
+					hm.put(CURRENCYNAME,ob.optString(CURRENCYNAME));
+					
+					hm.put(FLAG,jsonObj.optString(FLAG));
+					
+					arraylist.add(hm);
+				}
+				
+				MySimpleArrayAdapter adapter=new MySimpleArrayAdapter(getApplicationContext(), arraylist);
+				lv.setAdapter(adapter);
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public class MySimpleArrayAdapter extends BaseAdapter {
+
+		private final Context context;
+		private final ArrayList values;
+		LayoutInflater inflater;
+
+		public MySimpleArrayAdapter(Context context, ArrayList values) {
+			this.context = context;
+			this.values = values;
+			// Cache the LayoutInflate to avoid asking for a new one each time.
+			inflater = LayoutInflater.from(this.context);
+		}
+
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return values.size();
+		}
+
+		public String getItem(int position) {
+			// TODO Auto-generated method stub
+			return (String) values.get(position);
+		}
+
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		public View getView(int position, View convertView, ViewGroup parent) {
+			MyViewHolder mViewHolder;
+
+			// Create a new row view
+			if (convertView == null) {
+
+				// inflating row layout
+				convertView = inflater.inflate(R.layout.rowlayout, null);
+
+				// Find the child views.
+				mViewHolder = new MyViewHolder();
+
+				mViewHolder.mcountry = (TextView) convertView.findViewById(R.id.textCountry);
+				mViewHolder.mlanguage = (TextView) convertView.findViewById(R.id.textLang);
+				mViewHolder.mcapital= (TextView) convertView.findViewById(R.id.textCapital);
+				mViewHolder.mcode= (TextView) convertView.findViewById(R.id.textCurrencyCode);
+				mViewHolder.mcurrencyname= (TextView) convertView.findViewById(R.id.textCurrencyName);
+				mViewHolder.mflag= (TextView) convertView.findViewById(R.id.textFlag);
+				mViewHolder.imageFlag= (ImageView) convertView.findViewById(R.id.image);
+
+				// Optimization: Tag the row with it's child views, so we don't
+				// have to
+				// call findViewById() later when we reuse the row.
+				convertView.setTag(mViewHolder);
+
+			} // Reuse existing row view
+			else {
+				// Because we use a ViewHolder, we avoid having to call
+				// findViewById().
+				mViewHolder = (MyViewHolder) convertView.getTag();
+			}
+			// Find the child views.
+			HashMap m=(HashMap) values.get(position);
+//			m.get(SLOT);
+//			m.get(POINTS);
+			
+			mViewHolder.mcountry.setText(m.get(COUNTRYNAME).toString());
+			mViewHolder.mlanguage.setText(m.get(LANGUAGE).toString());
+			mViewHolder.mcapital.setText(m.get(CAPITAL).toString());
+			mViewHolder.mcode.setText(m.get(CODE).toString());
+			mViewHolder.mcurrencyname.setText(m.get(CURRENCYNAME).toString());
+			String s=m.get(FLAG).toString();
+			mViewHolder.mflag.setText(s);
+			Picasso.with(context).load(s).into(mViewHolder.imageFlag);
+
+//			mViewHolder.mslot.setText((CharSequence) values.get(position)
+//					.toString());
+//			mViewHolder.mpoints.setText((CharSequence) values.get(position)
+//					.toString());
+
+			return convertView;
+		}
+
+		private class MyViewHolder {
+			// The child views in each row.
+			TextView mcountry;
+			TextView mlanguage;
+			TextView mcapital;
+			TextView mcurrency;
+			TextView mcode;
+			TextView mcurrencyname;
+			TextView mflag;
+			ImageView imageFlag;
+		}
+	}
+
+}
+
+activity_main.xml
+-------------------
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="JSon Parsing Images" />
+    
+    <ListView 
+        android:id="@+id/listImage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"/>
+
+</RelativeLayout>
+
+rowlayout.xml
+--------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+        
+          <TextView
+            android:id="@+id/textFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image url" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <TextView
+            android:id="@+id/textLang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <TextView
+            android:id="@+id/textCapital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <TextView
+                android:id="@+id/textCurrencyCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="text" />
+
+            <TextView
+                android:id="@+id/textCurrencyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+

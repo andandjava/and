@@ -1,0 +1,461 @@
+Navigation Drawer
+=================
+Include a FrameLayout as a child of the DrawerLayout and make the
+
+android:layout_gravity="left".
+
+ Then put anything you want in it.
+
+ You do not have to use only ListView. What you put in a view that has left gravity will be the left menu
+
+the other one(layout) we can use it as 
+
+android:layout_gravity="right"
+
+activity_main.xml
+=================
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- The main content view -->
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#323232" >
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="0.75"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:weightSum="1" >
+
+            <LinearLayout
+                android:id="@+id/layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:orientation="vertical"
+                android:paddingLeft="10dp" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:orientation="vertical"
+                android:paddingLeft="10dp" >
+
+                <ImageButton
+                    android:id="@+id/icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:background="#323232"
+                    android:src="@drawable/icon" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.1dp"
+                    android:background="#000000" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.1dp"
+                    android:background="#000000" />
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="65dp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.1dp"
+                    android:background="#000000" />
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="10dp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#323232"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textCatogories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:text="CATOGORIES"
+            android:textColor="#b2b2b2" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/popular" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:onClick="popularfun"
+                    android:text="Popular"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/following" />
+
+                <TextView
+                    android:id="@+id/textfollowing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:onClick="followingfun"
+                    android:text="Following"
+                    android:textColor="@color/mystyle" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/debut" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Debut"
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/everyone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Everyone"
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:text="PROFILE"
+            android:textColor="#b2b2b2" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.1dp"
+            android:background="#000000" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp" >
+
+            <TableRow
+                android:id="@+id/tableRow21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="User Name"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#ff6600"
+                    android:text="PRO"
+                    android:textColor="#ffffff"
+                    android:textSize="9sp" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+
+            <TableRow
+                android:id="@+id/tableRow22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/logout" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Logout"
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:background="#000000" />
+        </TableLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
+MainActivity.java
+=================
+package com.example.designapp5;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	
+	private DrawerLayout drawerlayout;
+	
+	private ListView drawerlist;
+	private String[] planets;
+	TextView tv;
+	LinearLayout linearlayout;
+	ImageButton imageButton;
+	ImageView image1,image2,image3;
+	Bitmap bm1,bm2,bm3,bmp1,bmp2,bmp3;
+		
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		drawerlayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+	//	drawerlist=(ListView)findViewById(R.id.drawerlist);
+	//	tv=(TextView)findViewById(R.id.textview1);
+		linearlayout=(LinearLayout)findViewById(R.id.linearlayout);
+		
+		
+		//planets=getResources().getStringArray(R.array.planets);
+	//	ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,planets);
+		//drawerlist.setAdapter(adapter);
+		imageButton=(ImageButton)findViewById(R.id.icon);
+		
+		imageButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				//linearlayout.openDrawer();
+				//DrawerLayout.openDrawer(linearlayout);
+				drawerlayout.openDrawer(linearlayout);
+				
+			}
+		});
+		//drawerlayout.setDrawerListener(listener)
+		
+		 image1 = (ImageView) findViewById(R.id.imageView10);
+         Bitmap bm1 = BitmapFactory.decodeResource(getResources(),R.drawable.download);
+         Bitmap bmp1 = RoundShape.getRoundedShape(bm1);
+         image1.setImageBitmap(bmp1);
+         
+         image2 = (ImageView) findViewById(R.id.imageView11);
+         Bitmap bm2 = BitmapFactory.decodeResource(getResources(),R.drawable.download2);
+         Bitmap bmp2 = RoundShape.getRoundedShape(bm2);
+         image2.setImageBitmap(bmp2);
+         
+         image3 = (ImageView) findViewById(R.id.imageView12);
+         Bitmap bm3 = BitmapFactory.decodeResource(getResources(),R.drawable.download3);
+         Bitmap bmp3 = RoundShape.getRoundedShape(bm3);
+         image3.setImageBitmap(bmp3);
+	}
+
+	public void popularfun(View v)
+	{
+		PopularFragment fp=new PopularFragment();
+		FragmentManager manager=getFragmentManager();
+		FragmentTransaction transaction=manager.beginTransaction();
+		transaction.replace(R.id.framelayout,fp,"fp");
+		transaction.commit();
+		
+	}
+	public void followingfun(View v)
+	{
+		FollowingFragment ff=new FollowingFragment();
+		FragmentManager manager=getFragmentManager();
+		FragmentTransaction transaction=manager.beginTransaction();
+		transaction.replace(R.id.framelayout,ff,"ff");
+		transaction.commit();
+		
+	}
+}

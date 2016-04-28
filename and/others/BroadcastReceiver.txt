@@ -1,0 +1,76 @@
+BroadcastReceiver
+----------------
+Broadcast Receivers simply respond to broadcast messages from other applications or from the system itself. These messages are sometime called events or intents. For example, applications can also initiate broadcasts to let other applications know that some data has been downloaded to the device and is available for them to use, so this is broadcast receiver who will intercept this communication and will initiate appropriate action.
+
+There are following two important steps to make BroadcastReceiver works for the system broadcasted intents -
+
+1. Creating the Broadcast Receiver.
+2  Registering Broadcast Receiver
+
+Creating the Broadcast Receiver
+-------------------------------
+A broadcast receiver is implemented as a subclass of BroadcastReceiver class and overriding the onReceive() method where each message is received as a Intent object parameter.
+
+public class MyReceiver extends BroadcastReceiver {
+   @Override
+   public void onReceive(Context context, Intent intent) {
+      Toast.makeText(context, "Intent Detected.", Toast.LENGTH_LONG).show();
+   }
+}
+
+ Registering Broadcast Receiver(system)
+-------------------------------
+two ways
+	1. static/ <receiver> tag in AndroidManifest.xml
+	2. dynamic 
+
+There are two ways to register Android broadcastreceiver.
+One is static way in which the broadcast receiver is registered in an android application via AndroidManifest.xml file.
+Another way of registering the broadcast receiver is dynamic, which is done using Context.registerReceiver() method. Dynamically registered broadcast receivers can be unregistered using Context.unregisterReceiver() method.
+
+Context.registerReceiver();--onResume()
+context.unregisterReceiver();--onPause()
+
+
+Broadcasting Custom Intents
+---------------------------
+If you want your application itself should generate and send custom intents then you will have to create and send those intents by using the sendBroadcast() method inside your activity class. If you use the sendStickyBroadcast(Intent) method, the Intent is sticky, meaning the Intent you are sending stays around after the broadcast is complete.
+
+public void broadcastIntent(View view)
+{
+   Intent intent = new Intent();
+   intent.setAction("com.tutorialspoint.CUSTOM_INTENT");
+   sendBroadcast(intent);
+}
+
+in Manifest file
+
+<application
+   android:icon="@drawable/ic_launcher"
+   android:label="@string/app_name"
+   android:theme="@style/AppTheme" >
+   <receiver android:name="MyReceiver">
+   
+      <intent-filter>
+         <action android:name="com.tutorialspoint.CUSTOM_INTENT">
+         </action>
+      </intent-filter>
+   
+   </receiver>
+</application>
+
+There are two major classes of broadcasts that can be received:
+
+Normal Broadcasts: These are sent with Context.sendBroadcast() as you just saw sometime back. They’re completely asynchronous, i.e., the broadcasts events/intents are received by all the receivers in an asynchronous fashion. The receivers are run in an undefined order, often at the same time. It’s efficient but receivers cannot use results from other receivers or abort the entire chain of execution at a certain level.
+Ordered Broadcasts: These are sent with Context.sendOrderedBroadcast(). They’re delivered to one receiver at a time. The order can be controlled with android:priority attribute of the matching intent-filter. Receivers with same priority will be executed in a random order. As each receiver executes, it can trasmit the result to the next one or even abort the entire broadcast chain so that no other receivers receive the broadcast intent and are executed.
+
+LocalBroadcastManager
+---------------------
+
+Helper to register for and send broadcasts of Intents to local objects within your process. This is has a number of advantages over sending global broadcasts with sendBroadcast(Intent):
+
+You know that the data you are broadcasting won't leave your app, so don't need to worry about leaking private data.
+It is not possible for other applications to send these broadcasts to your app, so you don't need to worry about having security holes they can exploit.
+It is more efficient than sending a global broadcast through the system.
+
+Note:Using the PackageManager to Manipulate (Enable/Disable) Static Receivers

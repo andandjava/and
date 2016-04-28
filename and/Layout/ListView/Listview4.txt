@@ -1,0 +1,61 @@
+ListView with text and image
+=============================
+a)create an Android Project
+b)create a android xml file
+
+rowlayout.xml
+=============
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="22px"
+        android:layout_height="22px"
+        android:layout_marginLeft="4px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="4px"
+        android:src="@drawable/ic_launcher" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/label"
+        android:textSize="20px" >
+    </TextView>
+</LinearLayout>
+
+c)MainActivity.java
+  =================
+package com.example.listview4;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class MainActivity extends ListActivity 
+{
+	 public void onCreate(Bundle icicle) 
+	 {
+		  super.onCreate(icicle);
+		  String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+		    "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X","Linux", "OS/2" };
+		  // Use your own layout
+		  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.rowlayout, R.id.label, values);
+		  setListAdapter(adapter);
+		 }
+
+		 @Override
+		 protected void onListItemClick(ListView l, View v, int position, long id) {
+		  String item = (String) getListAdapter().getItem(position);
+		  Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		 }
+}
+

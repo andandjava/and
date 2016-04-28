@@ -1,0 +1,1 @@
+adt/sdk/platform-tools>adb install -f location

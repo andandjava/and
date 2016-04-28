@@ -1,0 +1,103 @@
+CheckBox
+========
+onCheckedChanged
+
+activity_main.xml
+================	
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:text="Windows" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox1"
+        android:text="Android" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox2"
+        android:text="IPhone" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox3"
+        android:layout_marginLeft="20dp"
+        android:text="Button" />
+
+</RelativeLayout>
+MainActicity.java
+=================
+package com.example.checkbox;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnCheckedChangeListener{
+
+	CheckBox ch1,ch2,ch3;
+	Button b1;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	
+		ch1=(CheckBox)findViewById(R.id.checkBox1);
+		ch2=(CheckBox)findViewById(R.id.checkBox2);
+		ch3=(CheckBox)findViewById(R.id.checkBox3);
+		
+		b1=(Button)findViewById(R.id.button1);
+		
+		ch1.setOnCheckedChangeListener(this);
+		ch2.setOnCheckedChangeListener(this);
+		ch3.setOnCheckedChangeListener(this);
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		
+		if((buttonView.getId()==R.id.checkBox1)&&(buttonView.isChecked()))
+		{
+			Toast.makeText(this,"u selected checkbox1 and its id is"+ch1.getId(),1).show();
+		}
+		else if((buttonView.getId()==R.id.checkBox2)&&(buttonView.isChecked()))
+		{
+			Toast.makeText(this,"u selected checkbox2 getText Name"+ch2.getText(),1).show();
+		}
+		else
+		{
+			Toast.makeText(this,"u selected checkbox3 is clickable or not"+ch3.isClickable(),1).show();
+		}
+		
+	}
+}

@@ -1,0 +1,6 @@
+Different ways of getting LayoutInflater
+----------------------------------------
+LayoutInflater inflater = getLayoutInflater();
+LayoutInflater inflater = context.getLayoutInflater();
+LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+LayoutInflater inflater = LayoutInflater.from(context);
